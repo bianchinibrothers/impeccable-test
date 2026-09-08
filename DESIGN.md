@@ -19,7 +19,15 @@ colors:
   night-line: "oklch(34% 0.045 175)"
   on-night: "oklch(80% 0.028 175)"
   on-night-soft: "oklch(68% 0.03 175)"
+  on-night-dim: "oklch(66% 0.022 175)"
   focus: "oklch(58% 0.18 42)"
+  glow-gold: "oklch(82% 0.11 79 / 0.5)"
+  grain-light: "oklch(100% 0 0 / 0.6)"
+  grain-mid: "oklch(36% 0.05 70 / 0.18)"
+  grain-warm: "oklch(38% 0.07 35 / 0.14)"
+  node-hit: "oklch(30% 0.07 60)"
+  mag-rest: "oklch(52% 0.06 175)"
+  mag-track-origin: "oklch(38% 0.09 45)"
 typography:
   display:
     fontFamily: "Chakra Petch, Trebuchet MS, sans-serif"
@@ -42,11 +50,46 @@ typography:
     lineHeight: 1.3
     letterSpacing: "0.02em"
     textTransform: "uppercase"
+  display-secondary:
+    fontFamily: "Chakra Petch, Trebuchet MS, sans-serif"
+    fontSize: "clamp(2.2rem, 5.2vw, 4.4rem)"
+    fontWeight: 300
+    lineHeight: 0.98
+    letterSpacing: "-0.02em"
+    textTransform: "uppercase"
+  subhead:
+    fontFamily: "Chakra Petch, Trebuchet MS, sans-serif"
+    fontSize: "1.5rem"
+    fontWeight: 600
+    lineHeight: 1.25
+    letterSpacing: "0.02em"
+    textTransform: "uppercase"
   lead:
     fontFamily: "Zen Old Mincho, Georgia, serif"
     fontSize: "clamp(1.25rem, 2.1vw, 1.85rem)"
     fontWeight: 400
     lineHeight: 1.2
+  summary:
+    fontFamily: "Zen Old Mincho, Georgia, serif"
+    fontSize: "clamp(1rem, 1.15vw, 1.12rem)"
+    fontWeight: 400
+    lineHeight: 1.5
+  body-emphasis:
+    fontFamily: "Zen Old Mincho, Georgia, serif"
+    fontSize: "1.08rem"
+    fontWeight: 400
+    lineHeight: 1.55
+  caption:
+    fontFamily: "Zen Old Mincho, Georgia, serif"
+    fontSize: "0.92rem"
+    fontWeight: 400
+    lineHeight: 1.45
+  map-label:
+    fontFamily: "Azeret Mono, ui-monospace, SFMono-Regular, monospace"
+    fontSize: "11px"
+    fontWeight: 500
+    lineHeight: 1
+    letterSpacing: "0.02em"
   body:
     fontFamily: "Zen Old Mincho, Georgia, serif"
     fontSize: "1rem"

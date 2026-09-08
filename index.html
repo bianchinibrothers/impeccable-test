@@ -151,10 +151,14 @@
   .site-nav a:hover { color: var(--ink); border-bottom-color: var(--sun); }
   .header-status {
     font-family: var(--font-mono);
-    font-size: 0.78rem; letter-spacing: 0.04em;
+    font-size: 0.74rem; letter-spacing: 0.02em;
     color: var(--ash);
     font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
     white-space: nowrap;
+    /* a rule and an indent, so this reads as instrument annotation and not a nav item */
+    padding-left: 1.1rem;
+    border-left: 1px solid var(--line);
   }
 
   /* ---------- hero ---------- */
@@ -172,6 +176,10 @@
   }
   /* grid items default to min-width:auto, which lets the map's min-width widen the page */
   .hero-grid > * { min-width: 0; }
+  /* the plate spans both rows so the legend lands in the void under the copy;
+     below 1080px placement falls back to DOM order, which puts it after the plate */
+  .hero-grid .plate { grid-column: 2; grid-row: 1 / span 2; }
+  .hero-grid .legend { grid-column: 1; grid-row: 2; }
 
   .rail {
     position: absolute;
@@ -251,7 +259,10 @@
   .action-quiet:hover { color: var(--sun-deep); border-bottom-color: var(--sun); }
 
   /* legend — the map's colour code, printed rather than learned by clicking */
+  /* third grid child: sits under the copy on desktop, after the plate on mobile,
+     so the key never arrives before the map it keys */
   .legend {
+    grid-column: 1;
     margin: clamp(2rem, 3.5vw, 3.25rem) 0 0;
     max-width: 30rem;
     border-top: 1px solid var(--line);
@@ -314,7 +325,9 @@
   .map-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
   .pan-hint { display: none; color: var(--gold); }
   @media (max-width: 1080px) { .pan-hint { display: inline; } }
-  .plate svg.map { display: block; width: 100%; min-width: 540px; height: auto; }
+  /* min-width matches the viewBox width exactly, so the map never paints below 1:1
+     and its in-SVG type keeps the size it declares */
+  .plate svg.map { display: block; width: 100%; min-width: 640px; height: auto; }
 
   .node-box {
     fill: var(--night-soft);
@@ -535,6 +548,7 @@
   /* ---------- responsive ---------- */
   @media (max-width: 1080px) {
     .hero-grid { grid-template-columns: 1fr; }
+    .hero-grid .plate, .hero-grid .legend { grid-column: auto; grid-row: auto; }
     /* the governing axis turns into a sheet stamp rather than disappearing */
     .rail {
       position: static;
@@ -607,17 +621,6 @@
           </a>
           <a class="action-quiet" href="#signals">See what it watches</a>
         </div>
-
-        <dl class="legend">
-          <div><dt><span class="sw sw-origin" aria-hidden="true"></span>Origin</dt>
-               <dd>the component that failed</dd></div>
-          <div><dt><span class="sw sw-hit" aria-hidden="true"></span>In radius</dt>
-               <dd>goes down with it, marked +1, +2 by hop</dd></div>
-          <div><dt><span class="sw sw-clear" aria-hidden="true"></span>Clear</dt>
-               <dd>no dependency path from the origin</dd></div>
-          <div><dt><span class="sw sw-mag" aria-hidden="true"></span>Bar</dt>
-               <dd>services this component would take with it</dd></div>
-        </dl>
       </div>
 
       <div class="plate">
@@ -642,6 +645,17 @@
 
         <div class="plate-readout" id="readout" aria-live="polite"></div>
       </div>
+
+      <dl class="legend">
+        <div><dt><span class="sw sw-origin" aria-hidden="true"></span>Origin</dt>
+             <dd>the component that failed</dd></div>
+        <div><dt><span class="sw sw-hit" aria-hidden="true"></span>In radius</dt>
+             <dd>goes down with it, marked +1, +2 by hop</dd></div>
+        <div><dt><span class="sw sw-clear" aria-hidden="true"></span>Clear</dt>
+             <dd>no dependency path from the origin</dd></div>
+        <div><dt><span class="sw sw-mag" aria-hidden="true"></span>Bar</dt>
+             <dd>services this component would take with it</dd></div>
+      </dl>
     </div>
   </div>
 
@@ -914,6 +928,12 @@
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var timers = [];
+  var tracedAt = null;
+
+  function stamp(d) {
+    function p(n) { return (n < 10 ? "0" : "") + n; }
+    return p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds());
+  }
 
   function clearTimers() {
     timers.forEach(clearTimeout);
@@ -924,6 +944,7 @@
   // so the plate is never blank while it is still below the fold
   function trace(origin, primeOnly) {
     clearTimers();
+    tracedAt = new Date();
 
     NODES.forEach(function (n) {
       var g = nodeEls[n.id].g;
@@ -982,6 +1003,7 @@
     }
 
     var lines = [];
+    lines.push(row("traced", tracedAt ? stamp(tracedAt) : "—"));
     lines.push(row("origin", origin, "sev"));
     lines.push(row("impact", total === 0
       ? "no dependent services"

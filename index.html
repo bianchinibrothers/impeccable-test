@@ -1,0 +1,1056 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blastradius — the architecture portal for on-call SREs</title>
+<meta name="description" content="Blastradius draws the system you run and shows what a failing component takes down with it, before it takes it down.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600&family=Zen+Old+Mincho:wght@400;600;900&family=Azeret+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+
+    --paper: oklch(94% 0.035 78);
+    --paper-soft: oklch(91% 0.045 78);
+    --paper-deep: oklch(84% 0.06 73);
+    --rice: oklch(97% 0.02 82);
+
+    --ink: oklch(18% 0.035 82);
+    --ink-soft: oklch(32% 0.045 80);
+    --ash: oklch(42% 0.04 80);
+    --line: oklch(73% 0.055 77);
+
+    --gold: oklch(68% 0.145 74);
+    --gold-bright: oklch(76% 0.165 80);
+
+    --sun: oklch(64% 0.19 43);
+    --sun-deep: oklch(46% 0.165 37);
+
+    --night: oklch(17% 0.035 185);
+    --night-soft: oklch(24% 0.04 170);
+    --night-line: oklch(34% 0.045 175);
+    --on-night: oklch(80% 0.028 175);
+    --on-night-soft: oklch(68% 0.03 175);
+
+    --focus: oklch(58% 0.18 42);
+    --plate-shadow: 0 28px 90px oklch(24% 0.05 75 / 0.22);
+
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+    --font-display: "Chakra Petch", "Trebuchet MS", sans-serif;
+    --font-serif: "Zen Old Mincho", Georgia, serif;
+    --font-mono: "Azeret Mono", ui-monospace, "SFMono-Regular", monospace;
+
+    --header-height: 74px;
+    --gutter: clamp(1.25rem, 4vw, 3.75rem);
+    --grid: 112px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    background: var(--paper);
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.55;
+    overflow-x: clip;
+    background:
+      radial-gradient(circle at 72% 4%, oklch(82% 0.11 79 / 0.5), transparent 20rem),
+      linear-gradient(90deg, oklch(20% 0.015 80 / 0.035) 1px, transparent 1px),
+      linear-gradient(0deg, oklch(20% 0.015 80 / 0.028) 1px, transparent 1px),
+      var(--paper);
+    background-size: auto, var(--grid) var(--grid), var(--grid) var(--grid), auto;
+  }
+
+  /* paper grain */
+  body::before {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    content: "";
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background:
+      radial-gradient(circle at 18% 21%, oklch(100% 0 0 / 0.6), transparent 0.08rem),
+      radial-gradient(circle at 76% 63%, oklch(36% 0.05 70 / 0.18), transparent 0.07rem),
+      radial-gradient(circle at 48% 88%, oklch(38% 0.07 35 / 0.14), transparent 0.06rem);
+    background-size: 0.7rem 0.85rem, 1.1rem 1.3rem, 0.95rem 1.05rem;
+  }
+
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  /* browser surfaces themed from the palette */
+  ::selection { background: var(--gold-bright); color: var(--ink); }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+  * { scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: var(--paper-soft); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border: 3px solid var(--paper-soft); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ash); }
+
+  .skip-link {
+    position: fixed; top: 1rem; left: 1rem; z-index: 90;
+    padding: 0.7rem 1rem;
+    color: var(--rice); background: var(--night);
+    font-family: var(--font-mono); font-size: 0.75rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transform: translateY(-180%);
+    transition: transform 240ms var(--ease);
+  }
+  .skip-link:focus { transform: translateY(0); }
+
+  .shell { padding-inline: var(--gutter); }
+
+  /* ---------- header ---------- */
+  .site-header {
+    position: fixed; inset: 0 0 auto; z-index: 50;
+    min-height: var(--header-height);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding-inline: var(--gutter);
+    border-bottom: 1px solid var(--line);
+    background: oklch(94% 0.035 78 / 0.9);
+    backdrop-filter: blur(12px);
+  }
+  .wordmark {
+    display: flex; align-items: baseline; gap: 0.55rem;
+    font-family: var(--font-display);
+    font-weight: 600; font-size: 1.02rem;
+    letter-spacing: 0.11em; text-transform: uppercase;
+  }
+  .wordmark .mark {
+    width: 11px; height: 11px;
+    background: var(--sun);
+    box-shadow: 0 0 0 4px oklch(64% 0.19 43 / 0.2);
+    align-self: center;
+  }
+  .site-nav { display: flex; justify-content: flex-end; gap: clamp(1.1rem, 2.4vw, 2.2rem); }
+  .site-nav a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-block: 0.4rem;
+    border-bottom: 1px solid transparent;
+    transition: color 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .site-nav a:hover { color: var(--ink); border-bottom-color: var(--sun); }
+  .header-status {
+    font-family: var(--font-mono);
+    font-size: 0.78rem; letter-spacing: 0.04em;
+    color: var(--ash);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    padding-top: calc(var(--header-height) + clamp(2rem, 4.5vw, 4rem));
+    padding-bottom: clamp(3rem, 6vw, 6rem);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+    gap: clamp(2rem, 4.5vw, 4.5rem);
+    align-items: start;
+  }
+  /* grid items default to min-width:auto, which lets the map's min-width widen the page */
+  .hero-grid > * { min-width: 0; }
+
+  .rail {
+    position: absolute;
+    left: calc(var(--gutter) * 0.28);
+    top: calc(var(--header-height) + 5.5rem);
+    writing-mode: vertical-rl;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--ash);
+    font-variant-numeric: tabular-nums;
+  }
+  .rail::after {
+    content: "";
+    display: block;
+    width: 1px; height: 5.5rem;
+    margin: 1.2rem auto 0;
+    background: linear-gradient(var(--line), transparent);
+  }
+
+  .hero h1 {
+    margin: 0;
+    max-width: 6em;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(3.1rem, 6.9vw, 6.4rem);
+    line-height: 0.94;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .hero h1 span { display: block; }
+  .hero h1 .radius { color: var(--sun-deep); }
+
+  .hero-place {
+    margin: 1rem 0 0;
+    max-width: 15ch;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.25rem, 2.1vw, 1.85rem);
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .hero-summary {
+    max-width: 34ch;
+    margin: 1.15rem 0 0;
+    color: var(--ink-soft);
+    font-size: clamp(1rem, 1.15vw, 1.12rem);
+    line-height: 1.5;
+  }
+
+  .hero-actions {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: 1.5rem;
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  }
+  .action {
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    padding: 0.95rem 1.6rem;
+    background: var(--night); color: var(--rice);
+    font-family: var(--font-mono);
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    transition: background 220ms var(--ease), transform 220ms var(--ease);
+  }
+  .action:hover { background: var(--sun-deep); transform: translateY(-2px); }
+  .action svg { width: 14px; height: 14px; flex: none; }
+  .action-quiet {
+    font-family: var(--font-mono);
+    font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.3rem;
+    transition: color 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .action-quiet:hover { color: var(--sun-deep); border-bottom-color: var(--sun); }
+
+  /* legend — the map's colour code, printed rather than learned by clicking */
+  .legend {
+    margin: clamp(2rem, 3.5vw, 3.25rem) 0 0;
+    max-width: 30rem;
+    border-top: 1px solid var(--line);
+  }
+  .legend > div {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 0.5rem 1rem;
+    align-items: baseline;
+    padding-block: 0.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .legend dt {
+    display: flex; align-items: center; gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink);
+  }
+  .legend dd {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+  .legend .sw { width: 13px; height: 13px; flex: none; border: 1px solid var(--ink); }
+  .legend .sw-origin { background: var(--sun); border-color: var(--sun-deep); }
+  .legend .sw-hit { background: var(--gold); border-color: var(--sun-deep); }
+  .legend .sw-clear { background: transparent; border-color: var(--ash); }
+  .legend .sw-mag {
+    height: 4px; align-self: center;
+    background: linear-gradient(90deg, var(--sun) 60%, transparent 60%);
+    border-color: var(--ash);
+  }
+
+  /* ---------- the plate ---------- */
+  .plate {
+    position: relative;
+    background: var(--night);
+    box-shadow: var(--plate-shadow);
+    padding: 1.1rem 1.1rem 0;
+    overflow: clip;
+  }
+  .plate-head {
+    display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem;
+    justify-content: space-between; align-items: baseline;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--night-line);
+    font-family: var(--font-mono);
+    font-size: 0.8rem; letter-spacing: 0.04em;
+    color: var(--on-night-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .plate-head b { color: var(--gold-bright); font-weight: 500; }
+  /* the trace reports itself in the head, so the verdict is legible above the fold */
+  .head-state { flex-basis: 100%; color: var(--rice); }
+  .head-state .o { color: var(--sun); }
+  .head-state .n { color: var(--gold-bright); }
+  .plate figure { margin: 0; }
+  /* the map keeps its legible size and scrolls rather than shrinking its labels */
+  .map-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+  .pan-hint { display: none; color: var(--gold); }
+  @media (max-width: 1080px) { .pan-hint { display: inline; } }
+  .plate svg.map { display: block; width: 100%; min-width: 540px; height: auto; }
+
+  .node-box {
+    fill: var(--night-soft);
+    stroke: var(--night-line);
+    stroke-width: 1;
+    transition: fill 380ms var(--ease), stroke 380ms var(--ease);
+  }
+  .node-label {
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.02em;
+    fill: var(--on-night);
+    transition: fill 380ms var(--ease);
+    pointer-events: none;
+  }
+  .node-hop {
+    font-family: var(--font-mono);
+    font-size: 11.5px; letter-spacing: 0.04em;
+    fill: var(--gold-bright);
+    opacity: 0;
+    transition: opacity 300ms var(--ease);
+    pointer-events: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .mag-track { fill: oklch(30% 0.03 175); }
+  .mag-fill { fill: oklch(52% 0.06 175); transition: fill 380ms var(--ease); }
+  .node.is-hit .mag-fill { fill: var(--gold); }
+  .node.is-origin .mag-fill { fill: var(--sun); }
+  .node.is-origin .mag-track { fill: oklch(38% 0.09 45); }
+
+  .edge {
+    fill: none;
+    stroke: var(--night-line);
+    stroke-width: 1;
+    transition: stroke 380ms var(--ease), stroke-width 380ms var(--ease);
+  }
+  .node { cursor: pointer; }
+  .node:focus { outline: none; }
+  .node:focus-visible .node-box { stroke: var(--focus); stroke-width: 2.5; }
+  .node:hover .node-box { stroke: var(--gold); }
+
+  .node.is-origin .node-box { fill: var(--sun-deep); stroke: var(--sun); }
+  .node.is-origin .node-label { fill: var(--rice); }
+  .node.is-hit .node-box { fill: oklch(30% 0.07 60); stroke: var(--gold); }
+  .node.is-hit .node-label { fill: var(--gold-bright); }
+  .node.is-hit .node-hop, .node.is-origin .node-hop { opacity: 1; }
+  .node.is-clear .node-box { fill: var(--night-soft); stroke: var(--night-line); }
+  .node.is-clear .node-label { fill: oklch(66% 0.022 175); }
+  .edge.is-hit { stroke: var(--gold); stroke-width: 1.8; }
+
+  .plate-readout {
+    border-top: 1px solid var(--night-line);
+    padding: 0.85rem 0 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem; line-height: 1.7;
+    color: var(--on-night);
+    font-variant-numeric: tabular-nums;
+    min-height: 5.6rem;
+  }
+  .plate-readout ol { margin: 0; padding: 0; list-style: none; }
+  .plate-readout li { display: flex; gap: 0.75rem; }
+  .plate-readout .k { color: var(--gold); white-space: nowrap; }
+  .plate-readout .v { color: var(--rice); }
+  .plate-readout .sev { color: var(--sun); }
+  .plate-caption {
+    margin: 0.85rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem; letter-spacing: 0.03em;
+    color: var(--on-night-soft);
+  }
+
+  /* ---------- generic section ---------- */
+  .band { padding-block: clamp(3.5rem, 7vw, 7rem); border-bottom: 1px solid var(--line); }
+  .band-head { max-width: 62rem; margin-bottom: clamp(2rem, 4vw, 3.25rem); }
+  .band-head h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.9rem, 3.6vw, 3.1rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+  .band-head p {
+    max-width: 46ch;
+    margin: 0.85rem 0 0;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- signal survey ---------- */
+  .survey { border-top: 1px solid var(--line); }
+  .survey-row {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 15rem) minmax(0, 1fr);
+    gap: clamp(1rem, 2.5vw, 2.5rem);
+    align-items: baseline;
+    padding-block: 1.4rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .survey-row .coord {
+    font-family: var(--font-mono);
+    font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--ash);
+    font-variant-numeric: tabular-nums;
+  }
+  .survey-row dt {
+    font-family: var(--font-display);
+    font-weight: 600; font-size: 1.02rem;
+    letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  .survey-row dd {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    max-width: 62ch;
+  }
+
+  /* ---------- roles: asymmetric, not equal cards ---------- */
+  .roles {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .role-major h3, .role-minor h3 {
+    margin: 0 0 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .role-major h3 { font-size: 1.5rem; }
+  .role-minor h3 { font-size: 1.05rem; color: var(--ink-soft); }
+  .role-major p, .role-minor p { margin: 0 0 1rem; max-width: 60ch; line-height: 1.55; }
+  .role-major p { font-size: 1.08rem; }
+  .role-minor { padding-left: clamp(1rem, 2vw, 2rem); border-left: 1px solid var(--line); }
+  .role-minor p { font-size: 0.97rem; color: var(--ink-soft); }
+  .role-note {
+    font-family: var(--font-mono);
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--sun-deep);
+  }
+
+  /* ---------- night band: single-ink commitment ---------- */
+  .night-band {
+    background: var(--night);
+    color: var(--rice);
+    border-bottom: none;
+    position: relative;
+  }
+  .night-band::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, oklch(34% 0.045 175 / 0.5) 1px, transparent 1px),
+      linear-gradient(0deg, oklch(34% 0.045 175 / 0.4) 1px, transparent 1px);
+    background-size: var(--grid) var(--grid);
+    pointer-events: none;
+  }
+  .night-band > * { position: relative; }
+  .night-band h2 { color: var(--rice); }
+  .night-band .band-head p { color: oklch(80% 0.025 175); }
+  /* same ruled-survey grammar as the signal list, not a three-up card triptych */
+  .deploy { border-top: 1px solid var(--night-line); }
+  .deploy > div {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 15rem) minmax(0, 1fr);
+    gap: clamp(1rem, 2.5vw, 2.5rem);
+    align-items: baseline;
+    padding-block: 1.4rem;
+    border-bottom: 1px solid var(--night-line);
+  }
+  .deploy .coord {
+    font-family: var(--font-mono);
+    font-size: 0.75rem; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--on-night-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .deploy dt {
+    font-family: var(--font-display);
+    font-weight: 600; font-size: 1.02rem;
+    letter-spacing: 0.02em; text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+  .deploy dd { margin: 0; color: var(--on-night); font-size: 0.98rem; max-width: 62ch; }
+
+  /* survey on the night ground */
+  .night-band .survey { border-top-color: var(--night-line); }
+  .night-band .survey-row { border-bottom-color: var(--night-line); }
+  .night-band .survey-row .coord { color: var(--on-night-soft); }
+  .night-band .survey-row dt { color: var(--gold-bright); }
+  .night-band .survey-row dd { color: var(--on-night); }
+
+  /* ---------- close ---------- */
+  .close { text-align: left; }
+  .close h2 {
+    margin: 0;
+    max-width: 16ch;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+  .close p { max-width: 44ch; margin: 1.1rem 0 0; color: var(--ink-soft); font-size: 1.05rem; }
+
+  footer {
+    padding-block: 2.25rem 3rem;
+    display: flex; flex-wrap: wrap; gap: 0.75rem 2rem;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.8rem; letter-spacing: 0.03em;
+    color: var(--ash);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1080px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    /* the governing axis turns into a sheet stamp rather than disappearing */
+    .rail {
+      position: static;
+      writing-mode: horizontal-tb;
+      margin: 0 0 1.5rem;
+      letter-spacing: 0.28em;
+    }
+    .rail::after { width: 3.5rem; height: 1px; margin: 0.9rem 0 0; background: linear-gradient(90deg, var(--line), transparent); }
+    .roles { grid-template-columns: 1fr; }
+    .role-minor { padding-left: 0; padding-top: 1.75rem; border-left: none; border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 760px) {
+    .site-nav { display: none; }
+    .survey-row,
+    .deploy > div { grid-template-columns: 1fr; gap: 0.35rem; padding-block: 1.15rem; }
+    .legend > div { grid-template-columns: 1fr; gap: 0.2rem; }
+    .plate { padding-inline: 0.8rem; }
+    .plate-readout { min-height: 8rem; }
+  }
+  @media (max-width: 560px) {
+    .site-header { grid-template-columns: 1fr auto; }
+    .header-status { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <a class="wordmark" href="#main"><span class="mark" aria-hidden="true"></span> Blastradius</a>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="#map">The map</a>
+    <a href="#signals">Signals</a>
+    <a href="#roles">Who it's for</a>
+    <a href="#run">Running it</a>
+  </nav>
+  <p class="header-status">Demo data · us-east-1 · 13 services</p>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO / THE PLATE ============ -->
+  <div class="hero shell" id="map">
+    <p class="rail" aria-hidden="true">Dependency survey — sheet 01</p>
+
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1>
+          <span>Know your</span>
+          <span>blast</span>
+          <span class="radius">radius</span>
+        </h1>
+        <p class="hero-place">The architecture portal for on-call SREs.</p>
+        <p class="hero-summary">
+          Blastradius draws the system you actually run, then shows you what a failing
+          component takes down with it — every dependent service, every hop, before the
+          page reaches you.
+        </p>
+        <div class="hero-actions">
+          <a class="action" href="#book">
+            Book a walkthrough
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M2 8h11M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+          <a class="action-quiet" href="#signals">See what it watches</a>
+        </div>
+
+        <dl class="legend">
+          <div><dt><span class="sw sw-origin" aria-hidden="true"></span>Origin</dt>
+               <dd>the component that failed</dd></div>
+          <div><dt><span class="sw sw-hit" aria-hidden="true"></span>In radius</dt>
+               <dd>goes down with it, marked +1, +2 by hop</dd></div>
+          <div><dt><span class="sw sw-clear" aria-hidden="true"></span>Clear</dt>
+               <dd>no dependency path from the origin</dd></div>
+          <div><dt><span class="sw sw-mag" aria-hidden="true"></span>Bar</dt>
+               <dd>services this component would take with it</dd></div>
+        </dl>
+      </div>
+
+      <div class="plate">
+        <div class="plate-head">
+          <span>Dependency map — <b>checkout</b> cluster</span>
+          <span>Select a component to trace impact<span class="pan-hint"> · drag the map sideways to pan</span></span>
+          <span class="head-state" id="head-state"></span>
+        </div>
+
+        <figure>
+          <div class="map-scroll">
+          <svg class="map" viewBox="0 0 640 512" role="application"
+               aria-label="Interactive dependency map. Select a component to trace which services it takes down.">
+            <g id="edges"></g>
+            <g id="nodes"></g>
+          </svg>
+          </div>
+          <figcaption class="plate-caption">
+            Synthetic topology shown for demonstration.
+          </figcaption>
+        </figure>
+
+        <div class="plate-readout" id="readout" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SIGNALS ============ -->
+  <section class="band night-band shell" id="signals">
+    <div class="band-head">
+      <h2>What it watches</h2>
+      <p>Five signal families, joined to the components they belong to rather than streamed into one flat feed.</p>
+    </div>
+
+    <dl class="survey">
+      <div class="survey-row">
+        <span class="coord">01 / SLO</span>
+        <dt>SLO &amp; error budgets</dt>
+        <dd>Burn-rate alerts on multi-window, multi-burn policy. Budget remaining per service, tracked against a 28-day rolling target.</dd>
+      </div>
+      <div class="survey-row">
+        <span class="coord">02 / CHG</span>
+        <dt>Deploy &amp; change events</dt>
+        <dd>CI pipelines, GitOps commits, feature-flag flips, and infra applies — timestamped to the second and joined to the component that moved.</dd>
+      </div>
+      <div class="survey-row">
+        <span class="coord">03 / VUL</span>
+        <dt>Vulnerability intelligence</dt>
+        <dd>NVD, GHSA, and OS vendor feeds matched to running image digests, package manifests, and SBOMs. Reachability-scored, not merely present.</dd>
+      </div>
+      <div class="survey-row">
+        <span class="coord">04 / ESC</span>
+        <dt>On-call &amp; escalation</dt>
+        <dd>Rotation state, ack latency, and hand-off notes. Knows whether a page belongs to an SRE, to security, or to both.</dd>
+      </div>
+      <div class="survey-row">
+        <span class="coord">05 / IAM</span>
+        <dt>Identity &amp; access anomalies</dt>
+        <dd>New privilege grants, token minting, and unusual admin-API calls, placed on the same map as the reliability signal.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- ============ ROLES ============ -->
+  <section class="band shell" id="roles">
+    <div class="band-head">
+      <h2>Who it's for</h2>
+    </div>
+    <div class="roles">
+      <div class="role-major">
+        <h3>The SRE holding the pager</h3>
+        <p>
+          You inherited a system nobody has drawn in two years. When something breaks at
+          02:00, the first ten minutes go to working out what else is downstream of it —
+          which is exactly the information Blastradius has already computed.
+        </p>
+        <p>
+          The map is built from what is actually deployed: service discovery, traces, and
+          infrastructure state. It updates when the architecture does, not when someone
+          remembers to update the wiki.
+        </p>
+        <p class="role-note">Primary audience</p>
+      </div>
+      <div class="role-minor">
+        <h3>Security, on the same map</h3>
+        <p>
+          A CVE matters differently depending on where it sits. Blastradius scores
+          advisories against the components that actually run the vulnerable build, and
+          shows what that component would take with it.
+        </p>
+        <p class="role-note">Secondary audience</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RUNNING IT ============ -->
+  <section class="band night-band shell" id="run">
+    <div class="band-head">
+      <h2>Running it</h2>
+      <p>Deployment and compliance posture, stated plainly.</p>
+    </div>
+    <dl class="deploy">
+      <div>
+        <span class="coord">06 / DEP</span>
+        <dt>Self-host or cloud</dt>
+        <dd>Run it inside your own perimeter, or let us run it. The same build, the same map, the same data model.</dd>
+      </div>
+      <div>
+        <span class="coord">07 / SOC</span>
+        <dt>SOC 2 Type II</dt>
+        <dd>Audited controls covering security, availability, and confidentiality.</dd>
+      </div>
+      <div>
+        <span class="coord">08 / DEM</span>
+        <dt>No agent for the demo</dt>
+        <dd>The walkthrough runs against a read-only view of your service discovery. Nothing is installed to see the map.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- ============ CLOSE ============ -->
+  <section class="band close shell" id="book">
+    <h2>See your own map</h2>
+    <p>
+      A 30-minute walkthrough, drawn against your own services. No agent to install to
+      see it.
+    </p>
+    <div class="hero-actions">
+      <a class="action" href="mailto:walkthrough@blastradius.example?subject=Blastradius%20walkthrough">
+        Book a walkthrough
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M2 8h11M9 4l4 4-4 4"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="shell">
+  <span>Blastradius — the architecture portal for on-call SREs</span>
+  <span>Self-host or cloud · SOC 2 Type II</span>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // --- topology (synthetic, for demonstration) ---
+  var NODES = [
+    { id: "edge-gateway",     x: 320, y:  44 },
+    { id: "checkout-api",     x: 128, y: 154 },
+    { id: "search-api",       x: 320, y: 154 },
+    { id: "auth-svc",         x: 512, y: 154 },
+    { id: "payments-api",     x:  82, y: 264 },
+    { id: "inventory",        x: 250, y: 264 },
+    { id: "session-store",    x: 418, y: 264 },
+    { id: "notify-worker",    x: 566, y: 264 },
+    { id: "ledger",           x: 148, y: 374 },
+    { id: "postgres-primary", x: 340, y: 374 },
+    { id: "kafka",            x: 528, y: 374 },
+    { id: "object-store",     x: 258, y: 476 },
+    { id: "pg-replica",       x: 438, y: 476 }
+  ];
+
+  // "a depends on b"
+  var EDGES = [
+    ["edge-gateway", "checkout-api"], ["edge-gateway", "search-api"], ["edge-gateway", "auth-svc"],
+    ["checkout-api", "payments-api"], ["checkout-api", "inventory"], ["checkout-api", "session-store"],
+    ["search-api", "inventory"], ["search-api", "session-store"],
+    ["auth-svc", "session-store"], ["auth-svc", "postgres-primary"],
+    ["payments-api", "ledger"], ["payments-api", "kafka"],
+    ["inventory", "postgres-primary"], ["inventory", "kafka"],
+    ["notify-worker", "kafka"],
+    ["ledger", "postgres-primary"],
+    ["pg-replica", "postgres-primary"],
+    ["kafka", "object-store"]
+  ];
+
+  var NW = 128, NH = 34;
+  var byId = {};
+  NODES.forEach(function (n) { byId[n.id] = n; });
+
+  // dependents: who breaks if `id` breaks
+  var dependents = {};
+  NODES.forEach(function (n) { dependents[n.id] = []; });
+  EDGES.forEach(function (e) { dependents[e[1]].push(e[0]); });
+
+  var svg = document.querySelector("svg.map");
+  var edgeLayer = document.getElementById("edges");
+  var nodeLayer = document.getElementById("nodes");
+  var readout = document.getElementById("readout");
+  var NS = "http://www.w3.org/2000/svg";
+
+  function el(name, attrs) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) { if (attrs[k] !== undefined) e.setAttribute(k, attrs[k]); }
+    return e;
+  }
+
+  // --- draw edges as orthogonal survey runs ---
+  var edgeEls = {};
+  EDGES.forEach(function (e) {
+    var a = byId[e[0]], b = byId[e[1]];
+    // leave each box from the face that points at the other box
+    var down = b.y > a.y;
+    var y1 = a.y + (down ? NH / 2 : -NH / 2);
+    var y2 = b.y + (down ? -NH / 2 : NH / 2);
+    var mid = y1 + (y2 - y1) * 0.55;
+    var d = "M" + a.x + " " + y1 + " V" + mid + " H" + b.x + " V" + y2;
+    var p = el("path", { d: d, class: "edge" });
+    edgeEls[e[0] + ">" + e[1]] = p;
+    edgeLayer.appendChild(p);
+  });
+
+  // --- blast magnitude, so severity is carried by size and not by colour alone ---
+  var magnitude = {};
+  var maxMag = 1;
+  NODES.forEach(function (n) {
+    var seen = {}, f = [n.id], c = 0;
+    seen[n.id] = true;
+    while (f.length) {
+      var nx = [];
+      f.forEach(function (id) {
+        dependents[id].forEach(function (d) {
+          if (!seen[d]) { seen[d] = true; c++; nx.push(d); }
+        });
+      });
+      f = nx;
+    }
+    magnitude[n.id] = c;
+    if (c > maxMag) maxMag = c;
+  });
+
+  // --- draw nodes ---
+  var nodeEls = {};
+  NODES.forEach(function (n) {
+    var g = el("g", {
+      class: "node", tabindex: "0", role: "button",
+      "aria-label": "Trace impact from " + n.id
+    });
+    g.appendChild(el("rect", {
+      class: "node-box", x: n.x - NW / 2, y: n.y - NH / 2, width: NW, height: NH
+    }));
+    var t = el("text", {
+      class: "node-label", x: n.x, y: n.y - 1, "text-anchor": "middle"
+    });
+    t.textContent = n.id;
+    g.appendChild(t);
+    var h = el("text", {
+      class: "node-hop", x: n.x + NW / 2 - 4, y: n.y - NH / 2 - 6, "text-anchor": "end"
+    });
+    g.appendChild(h);
+
+    // magnitude bar, inside the box so it never collides with an edge run:
+    // how much this component takes with it, readable before the label
+    var mw = magnitude[n.id] / maxMag * (NW - 18);
+    g.appendChild(el("rect", {
+      class: "mag-track", x: n.x - NW / 2 + 9, y: n.y + 8, width: NW - 18, height: 3
+    }));
+    if (mw > 0) {
+      g.appendChild(el("rect", {
+        class: "mag-fill", x: n.x - NW / 2 + 9, y: n.y + 8, width: mw, height: 3
+      }));
+    }
+    g.appendChild(el("title", {})).textContent =
+      n.id + " — " + magnitude[n.id] + " dependent service" +
+      (magnitude[n.id] === 1 ? "" : "s") + " downstream";
+
+    g.addEventListener("click", function () { trace(n.id); });
+    g.addEventListener("keydown", function (ev) {
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); trace(n.id); }
+    });
+
+    nodeEls[n.id] = { g: g, hop: h };
+    nodeLayer.appendChild(g);
+  });
+
+  // --- blast radius: BFS over dependents ---
+  function rings(origin) {
+    var seen = {}, out = [], frontier = [origin];
+    seen[origin] = true;
+    while (frontier.length) {
+      var next = [];
+      frontier.forEach(function (id) {
+        dependents[id].forEach(function (d) {
+          if (!seen[d]) { seen[d] = true; next.push(d); }
+        });
+      });
+      if (next.length) out.push(next);
+      frontier = next;
+    }
+    return out;
+  }
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var timers = [];
+
+  function clearTimers() {
+    timers.forEach(clearTimeout);
+    timers = [];
+  }
+
+  // primeOnly paints the resting state (origin + totals) without spending the cascade,
+  // so the plate is never blank while it is still below the fold
+  function trace(origin, primeOnly) {
+    clearTimers();
+
+    NODES.forEach(function (n) {
+      var g = nodeEls[n.id].g;
+      g.classList.remove("is-origin", "is-hit");
+      g.classList.add("is-clear");
+      nodeEls[n.id].hop.textContent = "";
+    });
+    Object.keys(edgeEls).forEach(function (k) { edgeEls[k].classList.remove("is-hit"); });
+
+    var og = nodeEls[origin].g;
+    og.classList.remove("is-clear");
+    og.classList.add("is-origin");
+    nodeEls[origin].hop.textContent = "origin";
+
+    var waves = rings(origin);
+    var total = waves.reduce(function (s, w) { return s + w.length; }, 0);
+    var step = reduced ? 0 : 420;
+
+    // everything reached so far, so an edge lights only once both ends are in the radius
+    var reached = {};
+    reached[origin] = true;
+
+    render(origin, waves, 0, total);
+    if (primeOnly) return;
+
+    waves.forEach(function (wave, i) {
+      var run = function () {
+        wave.forEach(function (id) {
+          var ne = nodeEls[id];
+          ne.g.classList.remove("is-clear");
+          ne.g.classList.add("is-hit");
+          ne.hop.textContent = "+" + (i + 1);
+          reached[id] = true;
+
+          // id depends on something already in the radius: that link carried the failure
+          EDGES.forEach(function (e) {
+            if (e[0] !== id || !reached[e[1]]) return;
+            var t = edgeEls[e[0] + ">" + e[1]];
+            if (t) t.classList.add("is-hit");
+          });
+        });
+        render(origin, waves, i + 1, total);
+      };
+      if (step) { timers.push(setTimeout(run, step * i)); } else { run(); }
+    });
+  }
+
+  function render(origin, waves, shown, total) {
+    var head = document.getElementById("head-state");
+    if (head) {
+      head.innerHTML = total === 0
+        ? '<span class="o">' + esc(origin) + "</span> — isolated, nothing downstream"
+        : '<span class="o">' + esc(origin) + '</span> takes <span class="n">' + total +
+          "</span> service" + (total === 1 ? "" : "s") + ' with it, across <span class="n">' +
+          waves.length + "</span> hop" + (waves.length === 1 ? "" : "s");
+    }
+
+    var lines = [];
+    lines.push(row("origin", origin, "sev"));
+    lines.push(row("impact", total === 0
+      ? "no dependent services"
+      : total + " dependent service" + (total === 1 ? "" : "s") +
+        " across " + waves.length + " hop" + (waves.length === 1 ? "" : "s")));
+
+    waves.slice(0, shown).forEach(function (wave, i) {
+      lines.push(row("hop +" + (i + 1), wave.join("  ")));
+    });
+
+    if (shown >= waves.length) {
+      var outer = waves.length ? waves[waves.length - 1] : [];
+      lines.push(row("verdict", total === 0
+        ? "isolated — nothing downstream, safe to drain"
+        : "reaches " + outer.join(", ") + " at +" + waves.length,
+        total === 0 ? "" : "sev"));
+    }
+
+    readout.innerHTML = "<ol>" + lines.join("") + "</ol>";
+  }
+
+  function row(k, v, cls) {
+    return '<li><span class="k">' + esc(k) + '</span><span class="v ' +
+           (cls || "") + '">' + esc(v) + "</span></li>";
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  // --- one authored moment: the plate traces itself when it first comes into view ---
+  var LEAD = "postgres-primary";
+  var fired = false;
+
+  // where the map is wider than its column, bring the origin into the visible window
+  // instead of leaving the reader parked on the clipped left edge
+  function centreOrigin(id) {
+    var box = svg.parentNode;
+    if (!box || box.scrollWidth <= box.clientWidth) return;
+    var n = byId[id];
+    if (!n) return;
+    var scale = svg.getBoundingClientRect().width / 640;
+    box.scrollLeft = Math.max(0, n.x * scale - box.clientWidth / 2);
+  }
+
+  function kick() {
+    if (fired) return;
+    fired = true;
+    trace(LEAD);
+  }
+
+  trace(LEAD, true); // resting state, painted immediately
+  centreOrigin(LEAD);
+  window.addEventListener("resize", function () { centreOrigin(LEAD); });
+
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { kick(); io.disconnect(); }
+      });
+    }, { threshold: 0.2 });
+    io.observe(svg);
+  } else {
+    kick();
+  }
+})();
+</script>
+
+</body>
+</html>

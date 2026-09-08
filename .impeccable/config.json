@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-07T19:21:58.795Z",
+        "reason": "user confirmed: pinned https://impeccable.style/neo-mirai/ by URL and chose 'Redesign onto Neo Mirai'; the flagged ground is that world's own --paper token oklch(94% 0.035 78), copied verbatim from its stylesheet"
+      }
+    ]
+  }
+}

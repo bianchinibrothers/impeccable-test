@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-07T00:00:00Z",
+  "title": "Design System: Blastradius",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Ochre Paper",
+        "canonical": "oklch(94% 0.035 78)",
+        "tonalRamp": ["oklch(20% 0.035 78)", "oklch(31% 0.035 78)", "oklch(42% 0.035 78)", "oklch(53% 0.035 78)", "oklch(64% 0.035 78)", "oklch(75% 0.035 78)", "oklch(86% 0.035 78)", "oklch(96% 0.035 78)"]
+      },
+      "paper-soft": {
+        "role": "neutral",
+        "displayName": "Paper Soft",
+        "canonical": "oklch(91% 0.045 78)",
+        "tonalRamp": ["oklch(20% 0.045 78)", "oklch(31% 0.045 78)", "oklch(42% 0.045 78)", "oklch(53% 0.045 78)", "oklch(64% 0.045 78)", "oklch(75% 0.045 78)", "oklch(86% 0.045 78)", "oklch(96% 0.045 78)"]
+      },
+      "paper-deep": {
+        "role": "neutral",
+        "displayName": "Paper Deep",
+        "canonical": "oklch(84% 0.06 73)",
+        "tonalRamp": ["oklch(20% 0.06 73)", "oklch(31% 0.06 73)", "oklch(42% 0.06 73)", "oklch(53% 0.06 73)", "oklch(64% 0.06 73)", "oklch(75% 0.06 73)", "oklch(86% 0.06 73)", "oklch(96% 0.06 73)"]
+      },
+      "rice": {
+        "role": "neutral",
+        "displayName": "Rice",
+        "canonical": "oklch(97% 0.02 82)",
+        "tonalRamp": ["oklch(20% 0.02 82)", "oklch(31% 0.02 82)", "oklch(42% 0.02 82)", "oklch(53% 0.02 82)", "oklch(64% 0.02 82)", "oklch(75% 0.02 82)", "oklch(86% 0.02 82)", "oklch(97% 0.02 82)"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Drawing Ink",
+        "canonical": "oklch(18% 0.035 82)",
+        "tonalRamp": ["oklch(18% 0.035 82)", "oklch(29% 0.035 82)", "oklch(40% 0.035 82)", "oklch(51% 0.035 82)", "oklch(62% 0.035 82)", "oklch(73% 0.035 82)", "oklch(84% 0.035 82)", "oklch(95% 0.035 82)"]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "oklch(32% 0.045 80)",
+        "tonalRamp": ["oklch(18% 0.045 80)", "oklch(29% 0.045 80)", "oklch(40% 0.045 80)", "oklch(51% 0.045 80)", "oklch(62% 0.045 80)", "oklch(73% 0.045 80)", "oklch(84% 0.045 80)", "oklch(95% 0.045 80)"]
+      },
+      "ash": {
+        "role": "neutral",
+        "displayName": "Ash",
+        "canonical": "oklch(42% 0.04 80)",
+        "tonalRamp": ["oklch(18% 0.04 80)", "oklch(29% 0.04 80)", "oklch(40% 0.04 80)", "oklch(51% 0.04 80)", "oklch(62% 0.04 80)", "oklch(73% 0.04 80)", "oklch(84% 0.04 80)", "oklch(95% 0.04 80)"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Rule Line",
+        "canonical": "oklch(73% 0.055 77)",
+        "tonalRamp": ["oklch(20% 0.055 77)", "oklch(31% 0.055 77)", "oklch(42% 0.055 77)", "oklch(53% 0.055 77)", "oklch(64% 0.055 77)", "oklch(75% 0.055 77)", "oklch(86% 0.055 77)", "oklch(95% 0.055 77)"]
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "Survey Gold",
+        "canonical": "oklch(68% 0.145 74)",
+        "tonalRamp": ["oklch(20% 0.145 74)", "oklch(31% 0.145 74)", "oklch(42% 0.145 74)", "oklch(53% 0.145 74)", "oklch(64% 0.145 74)", "oklch(75% 0.145 74)", "oklch(86% 0.145 74)", "oklch(95% 0.145 74)"]
+      },
+      "gold-bright": {
+        "role": "secondary",
+        "displayName": "Gold Bright",
+        "canonical": "oklch(76% 0.165 80)",
+        "tonalRamp": ["oklch(20% 0.165 80)", "oklch(31% 0.165 80)", "oklch(42% 0.165 80)", "oklch(53% 0.165 80)", "oklch(64% 0.165 80)", "oklch(75% 0.165 80)", "oklch(86% 0.165 80)", "oklch(95% 0.165 80)"]
+      },
+      "sun": {
+        "role": "primary",
+        "displayName": "Burnt Sun",
+        "canonical": "oklch(64% 0.19 43)",
+        "tonalRamp": ["oklch(20% 0.19 43)", "oklch(31% 0.19 43)", "oklch(42% 0.19 43)", "oklch(53% 0.19 43)", "oklch(64% 0.19 43)", "oklch(75% 0.19 43)", "oklch(86% 0.19 43)", "oklch(95% 0.19 43)"]
+      },
+      "sun-deep": {
+        "role": "primary",
+        "displayName": "Sun Deep",
+        "canonical": "oklch(46% 0.165 37)",
+        "tonalRamp": ["oklch(20% 0.165 37)", "oklch(31% 0.165 37)", "oklch(42% 0.165 37)", "oklch(53% 0.165 37)", "oklch(64% 0.165 37)", "oklch(75% 0.165 37)", "oklch(86% 0.165 37)", "oklch(95% 0.165 37)"]
+      },
+      "night": {
+        "role": "tertiary",
+        "displayName": "Teal Night",
+        "canonical": "oklch(17% 0.035 185)",
+        "tonalRamp": ["oklch(17% 0.035 185)", "oklch(28% 0.035 185)", "oklch(39% 0.035 185)", "oklch(50% 0.035 185)", "oklch(61% 0.035 185)", "oklch(72% 0.035 185)", "oklch(83% 0.035 185)", "oklch(94% 0.035 185)"]
+      },
+      "night-soft": {
+        "role": "tertiary",
+        "displayName": "Night Soft",
+        "canonical": "oklch(24% 0.04 170)",
+        "tonalRamp": ["oklch(17% 0.04 170)", "oklch(28% 0.04 170)", "oklch(39% 0.04 170)", "oklch(50% 0.04 170)", "oklch(61% 0.04 170)", "oklch(72% 0.04 170)", "oklch(83% 0.04 170)", "oklch(94% 0.04 170)"]
+      },
+      "night-line": {
+        "role": "tertiary",
+        "displayName": "Night Line",
+        "canonical": "oklch(34% 0.045 175)",
+        "tonalRamp": ["oklch(17% 0.045 175)", "oklch(28% 0.045 175)", "oklch(39% 0.045 175)", "oklch(50% 0.045 175)", "oklch(61% 0.045 175)", "oklch(72% 0.045 175)", "oklch(83% 0.045 175)", "oklch(94% 0.045 175)"]
+      },
+      "on-night": {
+        "role": "neutral",
+        "displayName": "On Night",
+        "canonical": "oklch(80% 0.028 175)",
+        "tonalRamp": ["oklch(17% 0.028 175)", "oklch(28% 0.028 175)", "oklch(39% 0.028 175)", "oklch(50% 0.028 175)", "oklch(61% 0.028 175)", "oklch(72% 0.028 175)", "oklch(83% 0.028 175)", "oklch(94% 0.028 175)"]
+      },
+      "on-night-soft": {
+        "role": "neutral",
+        "displayName": "On Night Soft",
+        "canonical": "oklch(68% 0.03 175)",
+        "tonalRamp": ["oklch(17% 0.03 175)", "oklch(28% 0.03 175)", "oklch(39% 0.03 175)", "oklch(50% 0.03 175)", "oklch(61% 0.03 175)", "oklch(72% 0.03 175)", "oklch(83% 0.03 175)", "oklch(94% 0.03 175)"]
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus Orange",
+        "canonical": "oklch(58% 0.18 42)",
+        "tonalRamp": ["oklch(20% 0.18 42)", "oklch(31% 0.18 42)", "oklch(42% 0.18 42)", "oklch(53% 0.18 42)", "oklch(64% 0.18 42)", "oklch(75% 0.18 42)", "oklch(86% 0.18 42)", "oklch(95% 0.18 42)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline only. Chakra Petch 300, oversized uppercase, three explicit line spans, 6em measure cap." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings in band heads; the close section runs the same face larger." },
+      "title": { "displayName": "Title", "purpose": "Survey and deploy row terms, role headings. The one place the display face runs at 600." },
+      "lead": { "displayName": "Lead", "purpose": "The small Zen Old Mincho line beneath the hero display, capped at 15ch." },
+      "body": { "displayName": "Body", "purpose": "All prose, in Zen Old Mincho, always with an explicit ch measure (34-62ch)." },
+      "label": { "displayName": "Label", "purpose": "Mono uppercase: nav, buttons, legend terms, coordinates, the vertical rail." },
+      "telemetry": { "displayName": "Telemetry", "purpose": "Mixed-case mono with tabular figures: plate head, live readout, footer, header status." }
+    },
+    "shadows": [
+      { "name": "plate-lift", "value": "0 28px 90px oklch(24% 0.05 75 / 0.22)", "purpose": "The single lifted surface in the system: the dark dependency-map plate pinned onto the sheet." },
+      { "name": "mark-halo", "value": "0 0 0 4px oklch(64% 0.19 43 / 0.2)", "purpose": "Flat, blur-free spread ring on the 11px wordmark square. Not an elevation." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Standard easing for all state transitions: button hover (220ms), nav and link colour (200ms), map node and edge state (380ms), skip link (240ms)." },
+      { "name": "ease-quart", "value": "cubic-bezier(0.25, 1, 0.5, 1)", "purpose": "Secondary easing declared alongside the standard ease for slower settles." },
+      { "name": "reduced-motion", "value": "transition-duration: 1ms; animation-duration: 1ms; scroll-behavior: auto", "purpose": "Under prefers-reduced-motion all transitions collapse and smooth scrolling is disabled." }
+    ],
+    "breakpoints": [
+      { "name": "wide", "value": "1080px" },
+      { "name": "narrow", "value": "760px" },
+      { "name": "compact", "value": "560px" }
+    ],
+    "grid": [
+      { "name": "survey-grid", "value": "112px", "purpose": "The only spatial module. Painted into the body background over ochre and re-drawn in --night-line inside night bands." },
+      { "name": "gutter", "value": "clamp(1.25rem, 4vw, 3.75rem)", "purpose": "Inline padding of the .shell wrapper on every band." },
+      { "name": "grain", "value": "three offset radial dot fields, opacity 0.4, mix-blend-mode: multiply, fixed", "purpose": "Fixed paper texture over the whole viewport, in place of elevation." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "action",
+      "description": "The book-a-walkthrough button. Night ground, rice text, inline stroked arrow; sits inline in content, never in the header.",
+      "html": "<a class=\"ds-action\" href=\"#book\">Book a walkthrough <svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M2 8h11M9 4l4 4-4 4\"/></svg></a>",
+      "css": ".ds-action { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.95rem 1.6rem; background: var(--night, oklch(17% 0.035 185)); color: var(--rice, oklch(97% 0.02 82)); font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: none; border-radius: 0; transition: background 220ms cubic-bezier(0.16,1,0.3,1), transform 220ms cubic-bezier(0.16,1,0.3,1); } .ds-action svg { width: 14px; height: 14px; flex: none; } .ds-action:hover { background: var(--sun-deep, oklch(46% 0.165 37)); transform: translateY(-2px); } .ds-action:focus-visible { outline: 3px solid var(--focus, oklch(58% 0.18 42)); outline-offset: 4px; }"
+    },
+    {
+      "name": "Quiet Action",
+      "kind": "button",
+      "refersTo": "action-quiet",
+      "description": "The secondary link action: no ground, mono uppercase over a hairline underline that goes sun on hover.",
+      "html": "<a class=\"ds-action-quiet\" href=\"#signals\">See what it watches</a>",
+      "css": ".ds-action-quiet { display: inline-block; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--ink-soft, oklch(32% 0.045 80)); border-bottom: 1px solid var(--line, oklch(73% 0.055 77)); padding-bottom: 0.3rem; border-radius: 0; transition: color 200ms cubic-bezier(0.16,1,0.3,1), border-color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-action-quiet:hover { color: var(--sun-deep, oklch(46% 0.165 37)); border-bottom-color: var(--sun, oklch(64% 0.19 43)); } .ds-action-quiet:focus-visible { outline: 3px solid var(--focus, oklch(58% 0.18 42)); outline-offset: 4px; }"
+    },
+    {
+      "name": "Primary Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Right-aligned mono uppercase anchors on a transparent underline that fills with sun on hover. Hidden below 760px.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary\"><a href=\"#map\">The map</a><a href=\"#signals\">Signals</a><a href=\"#roles\">Who it's for</a><a href=\"#run\">Running it</a></nav>",
+      "css": ".ds-nav { display: flex; justify-content: flex-end; gap: clamp(1.1rem, 2.4vw, 2.2rem); } .ds-nav a { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--ink-soft, oklch(32% 0.045 80)); padding-block: 0.4rem; border-bottom: 1px solid transparent; transition: color 200ms cubic-bezier(0.16,1,0.3,1), border-color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-nav a:hover { color: var(--ink, oklch(18% 0.035 82)); border-bottom-color: var(--sun, oklch(64% 0.19 43)); } .ds-nav a:focus-visible { outline: 3px solid var(--focus, oklch(58% 0.18 42)); outline-offset: 4px; }"
+    },
+    {
+      "name": "Wordmark",
+      "kind": "custom",
+      "refersTo": "nav-link",
+      "description": "Display face at 600 with wide tracking, preceded by an 11px sun square carrying a flat halo ring.",
+      "html": "<a class=\"ds-wordmark\" href=\"#main\"><span class=\"ds-wordmark-mark\" aria-hidden=\"true\"></span> Blastradius</a>",
+      "css": ".ds-wordmark { display: inline-flex; align-items: baseline; gap: 0.55rem; font-family: var(--font-display, \"Chakra Petch\", sans-serif); font-weight: 600; font-size: 1.02rem; letter-spacing: 0.11em; text-transform: uppercase; text-decoration: none; color: var(--ink, oklch(18% 0.035 82)); } .ds-wordmark-mark { width: 11px; height: 11px; align-self: center; background: var(--sun, oklch(64% 0.19 43)); box-shadow: 0 0 0 4px oklch(64% 0.19 43 / 0.2); } .ds-wordmark:focus-visible { outline: 3px solid var(--focus, oklch(58% 0.18 42)); outline-offset: 4px; }"
+    },
+    {
+      "name": "Survey Row (paper)",
+      "kind": "card",
+      "refersTo": "survey-row",
+      "description": "The system's list primitive: coordinate, term, definition on hairline rules. Used for the signal list on paper.",
+      "html": "<dl class=\"ds-survey\"><div class=\"ds-survey-row\"><span class=\"ds-coord\">01 / SLO</span><dt>SLO &amp; error budgets</dt><dd>Burn-rate alerts on multi-window, multi-burn policy. Budget remaining per service, tracked against a 28-day rolling target.</dd></div><div class=\"ds-survey-row\"><span class=\"ds-coord\">02 / CHG</span><dt>Deploy &amp; change events</dt><dd>CI pipelines, GitOps commits, and infra applies — joined to the component that moved.</dd></div></dl>",
+      "css": ".ds-survey { border-top: 1px solid var(--line, oklch(73% 0.055 77)); margin: 0; } .ds-survey-row { display: grid; grid-template-columns: 5.5rem minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 2.5rem); align-items: baseline; padding-block: 1.4rem; border-bottom: 1px solid var(--line, oklch(73% 0.055 77)); } .ds-coord { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ash, oklch(42% 0.04 80)); font-variant-numeric: tabular-nums; } .ds-survey-row dt { font-family: var(--font-display, \"Chakra Petch\", sans-serif); font-weight: 600; font-size: 1.02rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink, oklch(18% 0.035 82)); } .ds-survey-row dd { margin: 0; font-family: var(--font-serif, \"Zen Old Mincho\", Georgia, serif); font-size: 0.98rem; line-height: 1.55; color: var(--ink-soft, oklch(32% 0.045 80)); max-width: 62ch; } @media (max-width: 760px) { .ds-survey-row { grid-template-columns: 1fr; gap: 0.35rem; padding-block: 1.15rem; } }"
+    },
+    {
+      "name": "Survey Row (night)",
+      "kind": "card",
+      "refersTo": "survey-row-night",
+      "description": "The same ruled grammar on the teal-night ground, used for the deploy list. Identical geometry, night rules, gold-bright terms.",
+      "html": "<div class=\"ds-night\"><dl class=\"ds-deploy\"><div><span class=\"ds-coord-n\">06 / DEP</span><dt>Self-host or cloud</dt><dd>Run it inside your own perimeter, or let us run it. The same build, the same map, the same data model.</dd></div><div><span class=\"ds-coord-n\">07 / SOC</span><dt>SOC 2 Type II</dt><dd>Audited controls covering security, availability, and confidentiality.</dd></div></dl></div>",
+      "css": ".ds-night { background: var(--night, oklch(17% 0.035 185)); padding: clamp(2rem, 5vw, 3.5rem); position: relative; } .ds-night::before { content: \"\"; position: absolute; inset: 0; background: linear-gradient(90deg, oklch(34% 0.045 175 / 0.5) 1px, transparent 1px), linear-gradient(0deg, oklch(34% 0.045 175 / 0.4) 1px, transparent 1px); background-size: 112px 112px; pointer-events: none; } .ds-deploy { position: relative; margin: 0; border-top: 1px solid var(--night-line, oklch(34% 0.045 175)); } .ds-deploy > div { display: grid; grid-template-columns: 5.5rem minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 2.5rem); align-items: baseline; padding-block: 1.4rem; border-bottom: 1px solid var(--night-line, oklch(34% 0.045 175)); } .ds-coord-n { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.75rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--on-night-soft, oklch(68% 0.03 175)); font-variant-numeric: tabular-nums; } .ds-deploy dt { font-family: var(--font-display, \"Chakra Petch\", sans-serif); font-weight: 600; font-size: 1.02rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--gold-bright, oklch(76% 0.165 80)); } .ds-deploy dd { margin: 0; font-family: var(--font-serif, \"Zen Old Mincho\", Georgia, serif); font-size: 0.98rem; line-height: 1.55; color: var(--on-night, oklch(80% 0.028 175)); max-width: 62ch; }"
+    },
+    {
+      "name": "Map Legend",
+      "kind": "chip",
+      "refersTo": "survey-row",
+      "description": "The map's colour code printed rather than learned by clicking. Keys the non-chromatic magnitude channel as explicitly as the colours.",
+      "html": "<dl class=\"ds-legend\"><div><dt><span class=\"ds-sw ds-sw-origin\" aria-hidden=\"true\"></span>Origin</dt><dd>the component that failed</dd></div><div><dt><span class=\"ds-sw ds-sw-hit\" aria-hidden=\"true\"></span>In radius</dt><dd>goes down with it, marked +1, +2 by hop</dd></div><div><dt><span class=\"ds-sw ds-sw-clear\" aria-hidden=\"true\"></span>Clear</dt><dd>no dependency path from the origin</dd></div><div><dt><span class=\"ds-sw ds-sw-mag\" aria-hidden=\"true\"></span>Bar</dt><dd>services this component would take with it</dd></div></dl>",
+      "css": ".ds-legend { margin: 0; max-width: 30rem; border-top: 1px solid var(--line, oklch(73% 0.055 77)); } .ds-legend > div { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 0.5rem 1rem; align-items: baseline; padding-block: 0.6rem; border-bottom: 1px solid var(--line, oklch(73% 0.055 77)); } .ds-legend dt { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink, oklch(18% 0.035 82)); } .ds-legend dd { margin: 0; font-family: var(--font-serif, \"Zen Old Mincho\", Georgia, serif); font-size: 0.92rem; line-height: 1.45; color: var(--ink-soft, oklch(32% 0.045 80)); } .ds-sw { width: 13px; height: 13px; flex: none; border: 1px solid var(--ink, oklch(18% 0.035 82)); } .ds-sw-origin { background: var(--sun, oklch(64% 0.19 43)); border-color: var(--sun-deep, oklch(46% 0.165 37)); } .ds-sw-hit { background: var(--gold, oklch(68% 0.145 74)); border-color: var(--sun-deep, oklch(46% 0.165 37)); } .ds-sw-clear { background: transparent; border-color: var(--ash, oklch(42% 0.04 80)); } .ds-sw-mag { height: 4px; align-self: center; background: linear-gradient(90deg, var(--sun, oklch(64% 0.19 43)) 60%, transparent 60%); border-color: var(--ash, oklch(42% 0.04 80)); }"
+    },
+    {
+      "name": "The Plate",
+      "kind": "card",
+      "refersTo": "plate",
+      "description": "The only lifted surface in the system: night ground, zero radius, hairline-ruled head and foot, carrying the plate-lift shadow.",
+      "html": "<div class=\"ds-plate\"><div class=\"ds-plate-head\"><span>Dependency map — <b>checkout</b> cluster</span><span>Select a component to trace impact</span><span class=\"ds-head-state\">Origin <span class=\"ds-o\">checkout-api</span> · <span class=\"ds-n\">6</span> services in radius</span></div><div class=\"ds-plate-body\">map</div><div class=\"ds-plate-readout\"><ol><li><span class=\"ds-k\">+1</span><span class=\"ds-v\">payments-api</span></li><li><span class=\"ds-k\">+2</span><span class=\"ds-v\">ledger</span></li></ol></div></div>",
+      "css": ".ds-plate { position: relative; background: var(--night, oklch(17% 0.035 185)); box-shadow: 0 28px 90px oklch(24% 0.05 75 / 0.22); padding: 1.1rem 1.1rem 0; border-radius: 0; overflow: clip; } .ds-plate-head { display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; justify-content: space-between; align-items: baseline; padding-bottom: 0.9rem; border-bottom: 1px solid var(--night-line, oklch(34% 0.045 175)); font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.8rem; letter-spacing: 0.04em; color: var(--on-night-soft, oklch(68% 0.03 175)); font-variant-numeric: tabular-nums; } .ds-plate-head b { color: var(--gold-bright, oklch(76% 0.165 80)); font-weight: 500; } .ds-head-state { flex-basis: 100%; color: var(--rice, oklch(97% 0.02 82)); } .ds-o { color: var(--sun, oklch(64% 0.19 43)); } .ds-n { color: var(--gold-bright, oklch(76% 0.165 80)); } .ds-plate-body { min-height: 8rem; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.8rem; color: var(--on-night-soft, oklch(68% 0.03 175)); } .ds-plate-readout { border-top: 1px solid var(--night-line, oklch(34% 0.045 175)); padding: 0.85rem 0 1.1rem; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.8rem; line-height: 1.7; color: var(--on-night, oklch(80% 0.028 175)); font-variant-numeric: tabular-nums; min-height: 5.6rem; } .ds-plate-readout ol { margin: 0; padding: 0; list-style: none; } .ds-plate-readout li { display: flex; gap: 0.75rem; } .ds-k { color: var(--gold, oklch(68% 0.145 74)); white-space: nowrap; } .ds-v { color: var(--rice, oklch(97% 0.02 82)); }"
+    },
+    {
+      "name": "Dependency Map Node",
+      "kind": "custom",
+      "refersTo": "node-box",
+      "description": "The signature component's atom: a 128x34 hard rectangle with a mono label and an in-box magnitude bar sized by transitive dependent count. States are origin, in-radius (with printed hop counter), clear, hover, and focus-visible. Severity is carried by bar width and colour together, never colour alone.",
+      "html": "<svg class=\"ds-map\" viewBox=\"0 0 420 140\" role=\"application\" aria-label=\"Dependency map sample\"><path class=\"ds-edge ds-edge-hit\" d=\"M96 47 V80 H300 V93\"/><g class=\"ds-node ds-is-origin\" tabindex=\"0\" role=\"button\" aria-label=\"Trace impact from checkout-api\"><rect class=\"ds-node-box\" x=\"32\" y=\"13\" width=\"128\" height=\"34\"/><text class=\"ds-node-label\" x=\"96\" y=\"29\" text-anchor=\"middle\">checkout-api</text><text class=\"ds-node-hop\" x=\"156\" y=\"7\" text-anchor=\"end\">origin</text><rect class=\"ds-mag-track\" x=\"41\" y=\"38\" width=\"110\" height=\"3\"/><rect class=\"ds-mag-fill\" x=\"41\" y=\"38\" width=\"88\" height=\"3\"/></g><g class=\"ds-node ds-is-hit\" tabindex=\"0\" role=\"button\" aria-label=\"Trace impact from payments-api\"><rect class=\"ds-node-box\" x=\"236\" y=\"93\" width=\"128\" height=\"34\"/><text class=\"ds-node-label\" x=\"300\" y=\"109\" text-anchor=\"middle\">payments-api</text><text class=\"ds-node-hop\" x=\"360\" y=\"87\" text-anchor=\"end\">+1</text><rect class=\"ds-mag-track\" x=\"245\" y=\"118\" width=\"110\" height=\"3\"/><rect class=\"ds-mag-fill\" x=\"245\" y=\"118\" width=\"44\" height=\"3\"/></g></svg>",
+      "css": ".ds-map { display: block; width: 100%; height: auto; background: var(--night, oklch(17% 0.035 185)); } .ds-node { cursor: pointer; } .ds-node-box { fill: var(--night-soft, oklch(24% 0.04 170)); stroke: var(--night-line, oklch(34% 0.045 175)); stroke-width: 1; transition: fill 380ms cubic-bezier(0.16,1,0.3,1), stroke 380ms cubic-bezier(0.16,1,0.3,1); } .ds-node-label { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 11px; font-weight: 500; letter-spacing: 0.02em; fill: var(--on-night, oklch(80% 0.028 175)); pointer-events: none; } .ds-node-hop { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 11.5px; letter-spacing: 0.04em; fill: var(--gold-bright, oklch(76% 0.165 80)); pointer-events: none; font-variant-numeric: tabular-nums; } .ds-mag-track { fill: oklch(30% 0.03 175); } .ds-mag-fill { fill: oklch(52% 0.06 175); transition: fill 380ms cubic-bezier(0.16,1,0.3,1); } .ds-edge { fill: none; stroke: var(--night-line, oklch(34% 0.045 175)); stroke-width: 1; transition: stroke 380ms cubic-bezier(0.16,1,0.3,1), stroke-width 380ms cubic-bezier(0.16,1,0.3,1); } .ds-edge-hit { stroke: var(--gold, oklch(68% 0.145 74)); stroke-width: 1.8; } .ds-is-origin .ds-node-box { fill: var(--sun-deep, oklch(46% 0.165 37)); stroke: var(--sun, oklch(64% 0.19 43)); } .ds-is-origin .ds-node-label { fill: var(--rice, oklch(97% 0.02 82)); } .ds-is-origin .ds-mag-fill { fill: var(--sun, oklch(64% 0.19 43)); } .ds-is-origin .ds-mag-track { fill: oklch(38% 0.09 45); } .ds-is-hit .ds-node-box { fill: oklch(30% 0.07 60); stroke: var(--gold, oklch(68% 0.145 74)); } .ds-is-hit .ds-node-label { fill: var(--gold-bright, oklch(76% 0.165 80)); } .ds-is-hit .ds-mag-fill { fill: var(--gold, oklch(68% 0.145 74)); } .ds-node:hover .ds-node-box { stroke: var(--gold, oklch(68% 0.145 74)); } .ds-node:focus { outline: none; } .ds-node:focus-visible .ds-node-box { stroke: var(--focus, oklch(58% 0.18 42)); stroke-width: 2.5; }"
+    },
+    {
+      "name": "Coordinate Rail",
+      "kind": "custom",
+      "refersTo": "nav-link",
+      "description": "The governing vertical axis: a mono uppercase sheet label in the left margin with a fading hairline tail. Turns into a horizontal sheet stamp below 1080px rather than disappearing.",
+      "html": "<p class=\"ds-rail\" aria-hidden=\"true\">Dependency survey — sheet 01</p>",
+      "css": ".ds-rail { writing-mode: vertical-rl; margin: 0; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--ash, oklch(42% 0.04 80)); font-variant-numeric: tabular-nums; } .ds-rail::after { content: \"\"; display: block; width: 1px; height: 5.5rem; margin: 1.2rem auto 0; background: linear-gradient(var(--line, oklch(73% 0.055 77)), transparent); } @media (max-width: 1080px) { .ds-rail { writing-mode: horizontal-tb; letter-spacing: 0.28em; margin: 0 0 1.5rem; } .ds-rail::after { width: 3.5rem; height: 1px; margin: 0.9rem 0 0; background: linear-gradient(90deg, var(--line, oklch(73% 0.055 77)), transparent); } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Surveyor's Plate",
+    "overview": "Blastradius is drawn, not laid out. The page behaves like a large architecture sheet: ochre survey paper with a 112px grid ruled across it, a multiply grain sitting over the whole surface, and a single dark plate pinned onto it carrying the dependency map. Nothing floats, nothing rounds, nothing glows. Structure is made of hairlines and registration, and the reader's eye is trained by coordinates (01 / SLO, 06 / DEP) rather than by boxes.\n\nThe world is Neo Mirai, pinned by the user and copied at the token level rather than paraphrased — the OKLCH values in :root are the canonical source and the frontmatter holds them unconverted. It replaced a previous Bricolage Grotesque / IBM Plex / blue identity wholesale; that earlier system is anti-reference, not authority, and nothing from it survives in this build. The material range is deliberately wide and saturated: ochre paper, deep teal night, gold, burnt sun. Softening it toward cream-and-serif is the one move the world cannot absorb.\n\nThe type pairing is the second surprise and it is intentional: oversized Chakra Petch at weight 300 in uppercase, over Zen Old Mincho body copy — a serif with old-book weight distribution that is unusual for an ops product and gives the technical content a drawn, printed register. Azeret Mono carries everything numeric. Density is high but rhythmically ruled: long survey rows on hairlines, wide bands of vertical air between sections, and an alternating paper -> night -> paper -> night -> paper cadence where the night owns whole regions instead of tinting accents.",
+    "keyCharacteristics": [
+      "Ochre paper ground under a 112px survey grid and a fixed multiply grain layer",
+      "Zero border-radius anywhere; hairline 1px rules are the only dividers",
+      "Flat by default with tonal layering; exactly one lifted surface (the plate)",
+      "Alternating paper and full-bleed teal-night sections, never tinted accents",
+      "Oversized uppercase Chakra Petch display over Zen Old Mincho body, Azeret Mono telemetry",
+      "Severity carried by size and colour together, never by colour alone",
+      "Ruled survey rows (coordinate / term / definition) as the universal list primitive"
+    ],
+    "rules": [
+      { "name": "The Full Range Rule", "body": "The ochre ground is only legitimate with the rest of the world present. Any surface using --paper must also carry the teal night, the gold, and the burnt sun. Ochre plus a serif and nothing else is the failure mode this palette was pinned to avoid — the ground is a saturated world's paper, not a beige theme.", "section": "colors" },
+      { "name": "The Single-Ink Rule", "body": "Night teal owns whole regions. A section is entirely paper or entirely night; night never appears as a tinted card, a stripe, or an accent block inside a paper section.", "section": "colors" },
+      { "name": "The Size-And-Colour Rule", "body": "Severity is never carried by colour alone. Every state that uses gold or sun also changes something non-chromatic — the magnitude bar's width, the stroke weight, a printed hop counter, or a word in the readout.", "section": "colors" },
+      { "name": "The Inverted Heading Rule", "body": "The large display line comes first and the small serif line sits beneath it. Nothing precedes a heading. Annotations that would conventionally be an eyebrow — .role-note's \"Primary audience\" — are set after their block, in mono, deliberately. This world has no kicker position and never invents one.", "section": "typography" },
+      { "name": "The Telemetry Mono Rule", "body": "Every figure, coordinate, identifier, timestamp, and machine state is set in Azeret Mono with font-variant-numeric: tabular-nums. Prose is never mono; numbers are never serif.", "section": "typography" },
+      { "name": "The Measure Rule", "body": "Mincho body copy always carries an explicit max-width in ch (34-62ch depending on role). An unbounded serif paragraph is out of system.", "section": "typography" },
+      { "name": "The Survey Grid Rule", "body": "112px is the page's only spatial module. Grid overlays, on paper or on night, are drawn at --grid and never at a second interval.", "section": "layout" },
+      { "name": "The Ruled List Rule", "body": "Multi-item content is a survey — coordinate, term, definition, on hairlines. The three-up card triptych does not exist in this system; the signal list and the deploy list use the identical grammar on opposite grounds.", "section": "layout" },
+      { "name": "The One Lifted Surface Rule", "body": "A screen gets at most one shadowed object, and it is the plate. Everything else — cards, rows, headers, buttons, the map's own nodes — sits flat on its ground and is separated by hairline rules or by tone.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do carry the full material range on every surface — ochre paper, teal night, gold, and burnt sun together (The Full Range Rule).",
+      "Do give night teal whole sections, and alternate paper -> night -> paper as the section rhythm.",
+      "Do draw structure with 1px hairlines in --line on paper and --night-line on night, and keep every corner at 0 radius.",
+      "Do use the ruled survey row — coordinate, term, definition — as the list primitive on both grounds.",
+      "Do encode severity with size and colour together: a bar width, a stroke weight, or a printed hop count alongside every gold or sun state.",
+      "Do set all figures, coordinates, and machine states in Azeret Mono with tabular figures, and all prose in Zen Old Mincho with an explicit ch measure.",
+      "Do put the large display line first and the small serif line beneath it; place annotations after their block.",
+      "Do theme browser surfaces from the palette — selection, scrollbar, and a 3px --focus ring at 4px offset.",
+      "Do keep the 112px survey grid as the only spatial module, on paper and on night alike.",
+      "Do print state as content in the plate head and a polite live readout, not as a floating badge."
+    ],
+    "donts": [
+      "Don't soften the world to cream-and-serif. Ochre without the teal, gold, and sun around it is out of system.",
+      "Don't add a second shadow. The plate is the only lifted surface; everything else is flat with tonal layering.",
+      "Don't round anything. No radius token exists above 0.",
+      "Don't use night teal as an accent tint, a stripe, or a coloured card inside a paper section.",
+      "Don't convey severity or state by colour alone — the accessibility commitment requires a second, non-chromatic channel.",
+      "Don't place a kicker or eyebrow above a heading. The inverted hierarchy is the world's own device and there is no eyebrow position to fill.",
+      "Don't build a three-up feature-card triptych. Multi-item content is a ruled survey.",
+      "Don't set body prose in mono or figures in the serif, and don't let a Mincho paragraph run without a ch cap.",
+      "Don't shrink map type to fit a viewport; the map pans at its legible size instead.",
+      "Don't reintroduce anything from the retired identity (Bricolage Grotesque, IBM Plex, blue #2f4fd6) — it is anti-reference, not heritage."
+    ]
+  }
+}

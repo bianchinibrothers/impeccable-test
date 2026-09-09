@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-07T00:00:00Z",
-  "title": "Design System: Blastradius",
+  "generatedAt": "2026-09-08T00:00:00Z",
+  "title": "Design System: Kith",
   "extensions": {
     "colorMeta": {
       "paper": {
@@ -106,40 +106,93 @@
         "canonical": "oklch(68% 0.03 175)",
         "tonalRamp": ["oklch(17% 0.03 175)", "oklch(28% 0.03 175)", "oklch(39% 0.03 175)", "oklch(50% 0.03 175)", "oklch(61% 0.03 175)", "oklch(72% 0.03 175)", "oklch(83% 0.03 175)", "oklch(94% 0.03 175)"]
       },
+      "on-night-dim": {
+        "role": "neutral",
+        "displayName": "On Night Dim",
+        "canonical": "oklch(70% 0.025 175)",
+        "tonalRamp": ["oklch(17% 0.025 175)", "oklch(28% 0.025 175)", "oklch(39% 0.025 175)", "oklch(50% 0.025 175)", "oklch(61% 0.025 175)", "oklch(72% 0.025 175)", "oklch(83% 0.025 175)", "oklch(94% 0.025 175)"]
+      },
       "focus": {
         "role": "primary",
         "displayName": "Focus Orange",
         "canonical": "oklch(58% 0.18 42)",
         "tonalRamp": ["oklch(20% 0.18 42)", "oklch(31% 0.18 42)", "oklch(42% 0.18 42)", "oklch(53% 0.18 42)", "oklch(64% 0.18 42)", "oklch(75% 0.18 42)", "oklch(86% 0.18 42)", "oklch(95% 0.18 42)"]
+      },
+      "bloom": {
+        "role": "texture",
+        "displayName": "Warm Bloom",
+        "canonical": "oklch(82% 0.11 79 / 0.5)",
+        "purpose": "A single radial-gradient glow at 72% 4% of the body background, fading to transparent by 20rem. The sheet's one warm light source, top-right. Decorative; never takes content.",
+        "tonalRamp": ["oklch(20% 0.11 79)", "oklch(31% 0.11 79)", "oklch(42% 0.11 79)", "oklch(53% 0.11 79)", "oklch(64% 0.11 79)", "oklch(75% 0.11 79)", "oklch(86% 0.11 79)", "oklch(95% 0.11 79)"]
+      },
+      "grain-light": {
+        "role": "texture",
+        "displayName": "Grain Light",
+        "canonical": "oklch(100% 0 0 / 0.6)",
+        "purpose": "The lightest of three offset radial dot fields in body::before (position fixed, opacity 0.4, mix-blend-mode multiply, z-index 60). Paper tooth in place of elevation.",
+        "tonalRamp": ["oklch(20% 0 0)", "oklch(31% 0 0)", "oklch(42% 0 0)", "oklch(53% 0 0)", "oklch(64% 0 0)", "oklch(75% 0 0)", "oklch(86% 0 0)", "oklch(97% 0 0)"]
+      },
+      "grain-mid": {
+        "role": "texture",
+        "displayName": "Grain Mid",
+        "canonical": "oklch(36% 0.05 70 / 0.18)",
+        "purpose": "The mid tone of the fixed multiply grain field.",
+        "tonalRamp": ["oklch(20% 0.05 70)", "oklch(31% 0.05 70)", "oklch(42% 0.05 70)", "oklch(53% 0.05 70)", "oklch(64% 0.05 70)", "oklch(75% 0.05 70)", "oklch(86% 0.05 70)", "oklch(95% 0.05 70)"]
+      },
+      "grain-warm": {
+        "role": "texture",
+        "displayName": "Grain Warm",
+        "canonical": "oklch(38% 0.07 35 / 0.14)",
+        "purpose": "The warm speckle of the fixed multiply grain field.",
+        "tonalRamp": ["oklch(20% 0.07 35)", "oklch(31% 0.07 35)", "oklch(42% 0.07 35)", "oklch(53% 0.07 35)", "oklch(64% 0.07 35)", "oklch(75% 0.07 35)", "oklch(86% 0.07 35)", "oklch(95% 0.07 35)"]
+      },
+      "grid-paper": {
+        "role": "texture",
+        "displayName": "Grid Ruling (paper)",
+        "canonical": "oklch(20% 0.015 80 / 0.035)",
+        "purpose": "The 112px survey grid painted into the body background over ochre: this alpha for verticals, oklch(20% 0.015 80 / 0.028) for horizontals. Appears nowhere else.",
+        "tonalRamp": ["oklch(20% 0.015 80)", "oklch(31% 0.015 80)", "oklch(42% 0.015 80)", "oklch(53% 0.015 80)", "oklch(64% 0.015 80)", "oklch(75% 0.015 80)", "oklch(86% 0.015 80)", "oklch(95% 0.015 80)"]
+      },
+      "grid-night": {
+        "role": "texture",
+        "displayName": "Grid Ruling (night)",
+        "canonical": "oklch(34% 0.045 175 / 0.5)",
+        "purpose": "The 112px grid redrawn inside night bands via a ::before overlay: this alpha for verticals, oklch(34% 0.045 175 / 0.4) for horizontals.",
+        "tonalRamp": ["oklch(17% 0.045 175)", "oklch(28% 0.045 175)", "oklch(39% 0.045 175)", "oklch(50% 0.045 175)", "oklch(61% 0.045 175)", "oklch(72% 0.045 175)", "oklch(83% 0.045 175)", "oklch(94% 0.045 175)"]
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero headline only. Chakra Petch 300, oversized uppercase, three explicit line spans, 6em measure cap." },
-      "headline": { "displayName": "Headline", "purpose": "Section headings in band heads; the close section runs the same face larger." },
-      "title": { "displayName": "Title", "purpose": "Survey and deploy row terms, role headings. The one place the display face runs at 600." },
-      "lead": { "displayName": "Lead", "purpose": "The small Zen Old Mincho line beneath the hero display, capped at 15ch." },
-      "body": { "displayName": "Body", "purpose": "All prose, in Zen Old Mincho, always with an explicit ch measure (34-62ch)." },
-      "label": { "displayName": "Label", "purpose": "Mono uppercase: nav, buttons, legend terms, coordinates, the vertical rail." },
-      "telemetry": { "displayName": "Telemetry", "purpose": "Mixed-case mono with tabular figures: plate head, live readout, footer, header status." }
+      "display": { "displayName": "Display", "purpose": "Hero headline only. Chakra Petch 300, oversized uppercase, three explicit line spans, 7em measure cap, last line in --sun-deep." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings in band heads. Chakra Petch 300 uppercase." },
+      "display-secondary": { "displayName": "Display Secondary", "purpose": "The closing section heading only, at a larger clamp, capped at 15ch." },
+      "title": { "displayName": "Title", "purpose": "Survey and pricing-tier terms (1.02-1.05rem), the data-note sub-head (1.05rem), the wordmark (1.02rem). The one place the display face runs at weight 600." },
+      "lead": { "displayName": "Lead", "purpose": "The single Zen Old Mincho line beneath the hero display, capped at 18ch, in --ink." },
+      "summary": { "displayName": "Summary", "purpose": "Zen Old Mincho ~1.05rem (clamp(1rem, 1.15vw, 1.1rem)): hero summary, band-head copy, closing-section copy, contact copy (1.02rem). The default paragraph size in the system." },
+      "body": { "displayName": "Body", "purpose": "The inherited 1rem base size on <body>; almost every paragraph overrides to Summary or Body-Tight." },
+      "body-tight": { "displayName": "Body Tight", "purpose": "Zen Old Mincho 0.98rem: ledger entries, pricing-tier descriptions, survey definitions, and the data note (0.97rem). Prose that sits inside a ruled row." },
+      "label": { "displayName": "Label", "purpose": "Mono uppercase 0.7-0.75rem: nav, header login, buttons, skip link, row coordinates, the Synthetic tag, the kept sub-line, the ledger domain coordinate (0.7rem), the vertical rail." },
+      "telemetry": { "displayName": "Telemetry", "purpose": "Mixed-case mono with tabular figures, 0.78rem primary. Neighbour sizes in the build: 1.05rem (pricing amount), 0.95rem (contact address), 0.82rem (provisional-pricing note), 0.8rem (footer), 0.78rem (left-leaf foot note), 0.76rem (ledger date column .when), 0.74rem (record-leaf foot caption and tally)." }
     },
     "shadows": [
-      { "name": "plate-lift", "value": "0 28px 90px oklch(24% 0.05 75 / 0.22)", "purpose": "The single lifted surface in the system: the dark dependency-map plate pinned onto the sheet." },
+      { "name": "leaf-lift", "value": "0 28px 90px oklch(24% 0.05 75 / 0.22)", "purpose": "Stored as --plate-shadow. The single lifted surface in the system: the teal-night record leaf pinned onto the sheet." },
       { "name": "mark-halo", "value": "0 0 0 4px oklch(64% 0.19 43 / 0.2)", "purpose": "Flat, blur-free spread ring on the 11px wordmark square. Not an elevation." }
     ],
     "motion": [
-      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Standard easing for all state transitions: button hover (220ms), nav and link colour (200ms), map node and edge state (380ms), skip link (240ms)." },
-      { "name": "ease-quart", "value": "cubic-bezier(0.25, 1, 0.5, 1)", "purpose": "Secondary easing declared alongside the standard ease for slower settles." },
-      { "name": "reduced-motion", "value": "transition-duration: 1ms; animation-duration: 1ms; scroll-behavior: auto", "purpose": "Under prefers-reduced-motion all transitions collapse and smooth scrolling is disabled." }
+      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The only easing used in the build: button hover and lift (220ms), nav/link/underline colour (200ms), skip link (240ms), and the ledger wipe (820ms)." },
+      { "name": "ledger-wipe", "value": "clip-path: inset(0 100% 0 0) to inset(0 0 0 0) over 820ms var(--ease)", "purpose": "The one authored moment. The whole ledger unfolds from the gutter on first view, triggered by an IntersectionObserver (threshold 0.35) on the .leaf-b container with a 1600ms load-time safety net. No per-row stagger." },
+      { "name": "reduced-motion", "value": "transition-duration: 1ms; animation-duration: 1ms; scroll-behavior: auto; ledger clip-path removed", "purpose": "Under prefers-reduced-motion all transitions collapse, smooth scrolling is disabled, and the ledger renders open with no wipe." }
     ],
     "breakpoints": [
-      { "name": "wide", "value": "1080px" },
-      { "name": "narrow", "value": "760px" },
-      { "name": "compact", "value": "560px" }
+      { "name": "wide", "value": "1080px", "purpose": "Spread and contact grid collapse to one column; the coordinate rail turns horizontal and trails the spread." },
+      { "name": "narrow", "value": "760px", "purpose": "Primary nav hides; survey rows stack; ledger rows go two-column with the entry full-width; pricing tiers go two-column; record-leaf side padding tightens to 0.9rem." },
+      { "name": "compact", "value": "560px", "purpose": "Header collapses to a 1fr auto grid." }
     ],
     "grid": [
-      { "name": "survey-grid", "value": "112px", "purpose": "The only spatial module. Painted into the body background over ochre and re-drawn in --night-line inside night bands." },
-      { "name": "gutter", "value": "clamp(1.25rem, 4vw, 3.75rem)", "purpose": "Inline padding of the .shell wrapper on every band." },
-      { "name": "grain", "value": "three offset radial dot fields, opacity 0.4, mix-blend-mode: multiply, fixed", "purpose": "Fixed paper texture over the whole viewport, in place of elevation." }
+      { "name": "survey-grid", "value": "112px", "purpose": "Stored as --grid. The only spatial module. Painted into the body background over ochre (grid-paper) and redrawn in night bands (grid-night)." },
+      { "name": "gutter", "value": "clamp(1.25rem, 4vw, 3.75rem)", "purpose": "Inline padding of the .shell wrapper on every band and the spread." },
+      { "name": "spread", "value": "minmax(0, 0.92fr) 1px minmax(0, 1.08fr)", "purpose": "The two-leaf spread: left leaf, 1px binding gutter, right record leaf; align-items: stretch; collapses to one flex column at 1080px." },
+      { "name": "grain", "value": "three offset radial dot fields (grain-light / grain-mid / grain-warm), opacity 0.4, mix-blend-mode: multiply, fixed, z-index 60", "purpose": "Fixed paper texture over the whole viewport, in place of elevation." },
+      { "name": "bloom", "value": "radial-gradient(circle at 72% 4%, oklch(82% 0.11 79 / 0.5), transparent 20rem)", "purpose": "The single warm light source on the ochre ground, top-right." }
     ]
   },
   "components": [
@@ -147,8 +200,8 @@
       "name": "Primary Action",
       "kind": "button",
       "refersTo": "action",
-      "description": "The book-a-walkthrough button. Night ground, rice text, inline stroked arrow; sits inline in content, never in the header.",
-      "html": "<a class=\"ds-action\" href=\"#book\">Book a walkthrough <svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M2 8h11M9 4l4 4-4 4\"/></svg></a>",
+      "description": "The start-the-record button. Night ground, rice mono label, inline stroked arrow; sits inline in content, never in the header.",
+      "html": "<a class=\"ds-action\" href=\"#login\">Start the record <svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M2 8h11M9 4l4 4-4 4\"/></svg></a>",
       "css": ".ds-action { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.95rem 1.6rem; background: var(--night, oklch(17% 0.035 185)); color: var(--rice, oklch(97% 0.02 82)); font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: none; border-radius: 0; transition: background 220ms cubic-bezier(0.16,1,0.3,1), transform 220ms cubic-bezier(0.16,1,0.3,1); } .ds-action svg { width: 14px; height: 14px; flex: none; } .ds-action:hover { background: var(--sun-deep, oklch(46% 0.165 37)); transform: translateY(-2px); } .ds-action:focus-visible { outline: 3px solid var(--focus, oklch(58% 0.18 42)); outline-offset: 4px; }"
     },
     {
@@ -156,120 +209,116 @@
       "kind": "button",
       "refersTo": "action-quiet",
       "description": "The secondary link action: no ground, mono uppercase over a hairline underline that goes sun on hover.",
-      "html": "<a class=\"ds-action-quiet\" href=\"#signals\">See what it watches</a>",
+      "html": "<a class=\"ds-action-quiet\" href=\"#about\">See what it keeps</a>",
       "css": ".ds-action-quiet { display: inline-block; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--ink-soft, oklch(32% 0.045 80)); border-bottom: 1px solid var(--line, oklch(73% 0.055 77)); padding-bottom: 0.3rem; border-radius: 0; transition: color 200ms cubic-bezier(0.16,1,0.3,1), border-color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-action-quiet:hover { color: var(--sun-deep, oklch(46% 0.165 37)); border-bottom-color: var(--sun, oklch(64% 0.19 43)); } .ds-action-quiet:focus-visible { outline: 3px solid var(--focus, oklch(58% 0.18 42)); outline-offset: 4px; }"
     },
     {
       "name": "Primary Navigation",
       "kind": "nav",
       "refersTo": "nav-link",
-      "description": "Right-aligned mono uppercase anchors on a transparent underline that fills with sun on hover. Hidden below 760px.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"Primary\"><a href=\"#map\">The map</a><a href=\"#signals\">Signals</a><a href=\"#roles\">Who it's for</a><a href=\"#run\">Running it</a></nav>",
-      "css": ".ds-nav { display: flex; justify-content: flex-end; gap: clamp(1.1rem, 2.4vw, 2.2rem); } .ds-nav a { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--ink-soft, oklch(32% 0.045 80)); padding-block: 0.4rem; border-bottom: 1px solid transparent; transition: color 200ms cubic-bezier(0.16,1,0.3,1), border-color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-nav a:hover { color: var(--ink, oklch(18% 0.035 82)); border-bottom-color: var(--sun, oklch(64% 0.19 43)); } .ds-nav a:focus-visible { outline: 3px solid var(--focus, oklch(58% 0.18 42)); outline-offset: 4px; }"
+      "description": "Right-aligned mono uppercase anchors on a transparent underline that fills with sun on hover, plus an always-underlined Log in link. Anchors hide below 760px.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary\"><a href=\"#about\">What it keeps</a><a href=\"#pricing\">Pricing</a><a href=\"#contact\">Contact</a><a class=\"ds-login\" href=\"#login\">Log in</a></nav>",
+      "css": ".ds-nav { display: flex; justify-content: flex-end; align-items: baseline; gap: clamp(1.1rem, 2.4vw, 2.2rem); } .ds-nav a { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--ink-soft, oklch(32% 0.045 80)); padding-block: 0.4rem; border-bottom: 1px solid transparent; transition: color 200ms cubic-bezier(0.16,1,0.3,1), border-color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-nav a:hover { color: var(--ink, oklch(18% 0.035 82)); border-bottom-color: var(--sun, oklch(64% 0.19 43)); } .ds-nav .ds-login { color: var(--ink, oklch(18% 0.035 82)); border-bottom-color: var(--line, oklch(73% 0.055 77)); padding-bottom: 0.25rem; } .ds-nav .ds-login:hover { color: var(--sun-deep, oklch(46% 0.165 37)); border-bottom-color: var(--sun, oklch(64% 0.19 43)); } .ds-nav a:focus-visible { outline: 3px solid var(--focus, oklch(58% 0.18 42)); outline-offset: 4px; }"
     },
     {
       "name": "Wordmark",
       "kind": "custom",
       "refersTo": "nav-link",
-      "description": "Display face at 600 with wide tracking, preceded by an 11px sun square carrying a flat halo ring.",
-      "html": "<a class=\"ds-wordmark\" href=\"#main\"><span class=\"ds-wordmark-mark\" aria-hidden=\"true\"></span> Blastradius</a>",
+      "description": "Display face at 600 with wide tracking, preceded by an 11px sun square carrying a flat, blur-free halo ring.",
+      "html": "<a class=\"ds-wordmark\" href=\"#main\"><span class=\"ds-wordmark-mark\" aria-hidden=\"true\"></span> Kith</a>",
       "css": ".ds-wordmark { display: inline-flex; align-items: baseline; gap: 0.55rem; font-family: var(--font-display, \"Chakra Petch\", sans-serif); font-weight: 600; font-size: 1.02rem; letter-spacing: 0.11em; text-transform: uppercase; text-decoration: none; color: var(--ink, oklch(18% 0.035 82)); } .ds-wordmark-mark { width: 11px; height: 11px; align-self: center; background: var(--sun, oklch(64% 0.19 43)); box-shadow: 0 0 0 4px oklch(64% 0.19 43 / 0.2); } .ds-wordmark:focus-visible { outline: 3px solid var(--focus, oklch(58% 0.18 42)); outline-offset: 4px; }"
     },
     {
-      "name": "Survey Row (paper)",
+      "name": "The Record Leaf & Ledger",
       "kind": "card",
-      "refersTo": "survey-row",
-      "description": "The system's list primitive: coordinate, term, definition on hairline rules. Used for the signal list on paper.",
-      "html": "<dl class=\"ds-survey\"><div class=\"ds-survey-row\"><span class=\"ds-coord\">01 / SLO</span><dt>SLO &amp; error budgets</dt><dd>Burn-rate alerts on multi-window, multi-burn policy. Budget remaining per service, tracked against a 28-day rolling target.</dd></div><div class=\"ds-survey-row\"><span class=\"ds-coord\">02 / CHG</span><dt>Deploy &amp; change events</dt><dd>CI pipelines, GitOps commits, and infra applies — joined to the component that moved.</dd></div></dl>",
-      "css": ".ds-survey { border-top: 1px solid var(--line, oklch(73% 0.055 77)); margin: 0; } .ds-survey-row { display: grid; grid-template-columns: 5.5rem minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 2.5rem); align-items: baseline; padding-block: 1.4rem; border-bottom: 1px solid var(--line, oklch(73% 0.055 77)); } .ds-coord { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ash, oklch(42% 0.04 80)); font-variant-numeric: tabular-nums; } .ds-survey-row dt { font-family: var(--font-display, \"Chakra Petch\", sans-serif); font-weight: 600; font-size: 1.02rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink, oklch(18% 0.035 82)); } .ds-survey-row dd { margin: 0; font-family: var(--font-serif, \"Zen Old Mincho\", Georgia, serif); font-size: 0.98rem; line-height: 1.55; color: var(--ink-soft, oklch(32% 0.045 80)); max-width: 62ch; } @media (max-width: 760px) { .ds-survey-row { grid-template-columns: 1fr; gap: 0.35rem; padding-block: 1.15rem; } }"
+      "refersTo": "record-leaf",
+      "description": "The one lifted surface: teal-night ground, zero radius, leaf-lift shadow, overflow clip. Carries a mono head with a bordered Synthetic tag, dated ledger rows on hairlines (date / domain coordinate / serif entry with a mono kept sub-line), and a foot with a caption and a kept/due tally. Rows carry is-aging / is-stale (metadata dims toward the ground, entry stays legible, date always doubles the signal) and is-due (date + domain go sun, entry goes rice, the kept line becomes the word DUE).",
+      "html": "<div class=\"ds-leaf\"><div class=\"ds-leaf-head\"><span>Record &mdash; <b>Mira</b>, age 3</span><span class=\"ds-tag\">Synthetic</span></div><dl class=\"ds-ledger\"><div class=\"ds-row\"><dt class=\"ds-when\">2025-03-09</dt><dt class=\"ds-dom\">Schl</dt><dd class=\"ds-entry\">Started at Little Cedars, room 2. Teacher: Ms. Bello.<span class=\"ds-kept\">kept 2025-03-09</span></dd></div><div class=\"ds-row ds-stale\"><dt class=\"ds-when\">2024-11-04</dt><dt class=\"ds-dom\">Vax</dt><dd class=\"ds-entry\">MMR, first dose. Dr. Okafor, Greenpoint Peds.<span class=\"ds-kept\">kept 2024-11-04</span></dd></div><div class=\"ds-row ds-due\"><dt class=\"ds-when\">2025-09</dt><dt class=\"ds-dom\">Vax</dt><dd class=\"ds-entry\">4&ndash;6y booster: DTaP, IPV, MMR. Due around the 4th birthday.<span class=\"ds-kept\">due</span></dd></div></dl><div class=\"ds-leaf-foot\"><p class=\"ds-caption\">Synthetic entries, shown to demonstrate the shape of the record. Not a real child.</p><span class=\"ds-tally\">2 kept &middot; <span class=\"ds-due-fig\">1 due</span></span></div></div>",
+      "css": ".ds-leaf { position: relative; background: var(--night, oklch(17% 0.035 185)); box-shadow: 0 28px 90px oklch(24% 0.05 75 / 0.22); padding: 1.1rem 1.2rem 0; border-radius: 0; overflow: clip; font-family: var(--font-serif, \"Zen Old Mincho\", Georgia, serif); } .ds-leaf-head { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; justify-content: space-between; align-items: baseline; padding-bottom: 0.9rem; border-bottom: 1px solid var(--night-line, oklch(34% 0.045 175)); font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.8rem; letter-spacing: 0.04em; color: var(--on-night-soft, oklch(68% 0.03 175)); font-variant-numeric: tabular-nums; } .ds-leaf-head b { color: var(--gold-bright, oklch(76% 0.165 80)); font-weight: 500; } .ds-tag { color: var(--on-night-dim, oklch(70% 0.025 175)); border: 1px solid var(--night-line, oklch(34% 0.045 175)); padding: 0.15rem 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.72rem; } .ds-ledger { margin: 0; } .ds-row { display: grid; grid-template-columns: 6.1rem 4.4rem minmax(0, 1fr); gap: 0.35rem 1rem; align-items: baseline; padding-block: 1.1rem; border-bottom: 1px solid var(--night-line, oklch(34% 0.045 175)); } .ds-when { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.76rem; letter-spacing: 0.02em; color: var(--on-night-soft, oklch(68% 0.03 175)); font-variant-numeric: tabular-nums; } .ds-dom { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.7rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--gold, oklch(68% 0.145 74)); } .ds-entry { margin: 0; font-size: 0.98rem; line-height: 1.5; color: var(--on-night, oklch(80% 0.028 175)); } .ds-kept { display: block; margin-top: 0.3rem; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--on-night-dim, oklch(70% 0.025 175)); font-variant-numeric: tabular-nums; } .ds-row.ds-stale .ds-dom, .ds-row.ds-stale .ds-kept { color: var(--on-night-dim, oklch(70% 0.025 175)); } .ds-row.ds-due .ds-when, .ds-row.ds-due .ds-dom { color: var(--sun, oklch(64% 0.19 43)); } .ds-row.ds-due .ds-entry { color: var(--rice, oklch(97% 0.02 82)); } .ds-row.ds-due .ds-kept { color: var(--sun, oklch(64% 0.19 43)); letter-spacing: 0.1em; text-transform: uppercase; } .ds-leaf-foot { border-top: 1px solid var(--night-line, oklch(34% 0.045 175)); padding: 0.85rem 0 1.15rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; justify-content: space-between; align-items: baseline; } .ds-caption { margin: 0; max-width: 34ch; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.74rem; letter-spacing: 0.02em; line-height: 1.5; color: var(--on-night-soft, oklch(68% 0.03 175)); } .ds-tally { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.74rem; letter-spacing: 0.03em; color: var(--on-night, oklch(80% 0.028 175)); font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-tally .ds-due-fig { color: var(--sun, oklch(64% 0.19 43)); } @media (max-width: 760px) { .ds-row { grid-template-columns: 6.1rem 1fr; row-gap: 0.15rem; } .ds-entry { grid-column: 1 / -1; } .ds-leaf { padding-inline: 0.9rem; } }"
     },
     {
-      "name": "Survey Row (night)",
+      "name": "Ruled Survey Row (paper)",
+      "kind": "card",
+      "refersTo": "survey-row",
+      "description": "The system's list primitive: coordinate, term, definition on hairline rules. Used for the What-it-keeps and trigger-moments lists on paper.",
+      "html": "<dl class=\"ds-survey\"><div class=\"ds-survey-row\"><span class=\"ds-coord\">01 / HEALTH</span><dt>Immunizations &amp; health</dt><dd>Doses with dates, allergies, and conditions, plus what's due next against the standard childhood schedule.</dd></div><div class=\"ds-survey-row\"><span class=\"ds-coord\">03 / KITH</span><dt>The people they love</dt><dd>The friends your child holds close, those friends' parents, and how to reach them.</dd></div></dl>",
+      "css": ".ds-survey { border-top: 1px solid var(--line, oklch(73% 0.055 77)); margin: 0; } .ds-survey-row { display: grid; grid-template-columns: 6.5rem minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 2.5rem); align-items: baseline; padding-block: 1.4rem; border-bottom: 1px solid var(--line, oklch(73% 0.055 77)); } .ds-coord { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ash, oklch(42% 0.04 80)); font-variant-numeric: tabular-nums; } .ds-survey-row dt { font-family: var(--font-display, \"Chakra Petch\", sans-serif); font-weight: 600; font-size: 1.02rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink, oklch(18% 0.035 82)); } .ds-survey-row dd { margin: 0; font-family: var(--font-serif, \"Zen Old Mincho\", Georgia, serif); font-size: 0.98rem; line-height: 1.55; color: var(--ink-soft, oklch(32% 0.045 80)); max-width: 62ch; } @media (max-width: 760px) { .ds-survey-row { grid-template-columns: 1fr; gap: 0.35rem; padding-block: 1.15rem; } }"
+    },
+    {
+      "name": "Ruled Survey Row (night)",
       "kind": "card",
       "refersTo": "survey-row-night",
-      "description": "The same ruled grammar on the teal-night ground, used for the deploy list. Identical geometry, night rules, gold-bright terms.",
-      "html": "<div class=\"ds-night\"><dl class=\"ds-deploy\"><div><span class=\"ds-coord-n\">06 / DEP</span><dt>Self-host or cloud</dt><dd>Run it inside your own perimeter, or let us run it. The same build, the same map, the same data model.</dd></div><div><span class=\"ds-coord-n\">07 / SOC</span><dt>SOC 2 Type II</dt><dd>Audited controls covering security, availability, and confidentiality.</dd></div></dl></div>",
-      "css": ".ds-night { background: var(--night, oklch(17% 0.035 185)); padding: clamp(2rem, 5vw, 3.5rem); position: relative; } .ds-night::before { content: \"\"; position: absolute; inset: 0; background: linear-gradient(90deg, oklch(34% 0.045 175 / 0.5) 1px, transparent 1px), linear-gradient(0deg, oklch(34% 0.045 175 / 0.4) 1px, transparent 1px); background-size: 112px 112px; pointer-events: none; } .ds-deploy { position: relative; margin: 0; border-top: 1px solid var(--night-line, oklch(34% 0.045 175)); } .ds-deploy > div { display: grid; grid-template-columns: 5.5rem minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 2.5rem); align-items: baseline; padding-block: 1.4rem; border-bottom: 1px solid var(--night-line, oklch(34% 0.045 175)); } .ds-coord-n { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.75rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--on-night-soft, oklch(68% 0.03 175)); font-variant-numeric: tabular-nums; } .ds-deploy dt { font-family: var(--font-display, \"Chakra Petch\", sans-serif); font-weight: 600; font-size: 1.02rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--gold-bright, oklch(76% 0.165 80)); } .ds-deploy dd { margin: 0; font-family: var(--font-serif, \"Zen Old Mincho\", Georgia, serif); font-size: 0.98rem; line-height: 1.55; color: var(--on-night, oklch(80% 0.028 175)); max-width: 62ch; }"
+      "description": "The same ruled grammar on the teal-night ground, with the 112px grid redrawn behind it. Identical geometry, night rules, gold-bright terms.",
+      "html": "<section class=\"ds-night-band\"><dl class=\"ds-survey ds-survey-n\"><div class=\"ds-survey-row\"><span class=\"ds-coord-n\">02 / SCHOOL</span><dt>Education</dt><dd>Schools, terms, teachers, and the milestones and reports worth keeping.</dd></div><div class=\"ds-survey-row\"><span class=\"ds-coord-n\">04 / PREF</span><dt>Preferences &amp; needs</dt><dd>Foods, fears, comforts, routines. The two-minute brief for a grandparent or a new sitter.</dd></div></dl></section>",
+      "css": ".ds-night-band { background: var(--night, oklch(17% 0.035 185)); color: var(--rice, oklch(97% 0.02 82)); padding: clamp(2rem, 5vw, 3.5rem); position: relative; } .ds-night-band::before { content: \"\"; position: absolute; inset: 0; background: linear-gradient(90deg, oklch(34% 0.045 175 / 0.5) 1px, transparent 1px), linear-gradient(0deg, oklch(34% 0.045 175 / 0.4) 1px, transparent 1px); background-size: 112px 112px; pointer-events: none; } .ds-survey-n { position: relative; border-top: 1px solid var(--night-line, oklch(34% 0.045 175)); margin: 0; } .ds-survey-n .ds-survey-row { display: grid; grid-template-columns: 6.5rem minmax(0, 15rem) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 2.5rem); align-items: baseline; padding-block: 1.4rem; border-bottom: 1px solid var(--night-line, oklch(34% 0.045 175)); } .ds-coord-n { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--on-night-soft, oklch(68% 0.03 175)); font-variant-numeric: tabular-nums; } .ds-survey-n dt { font-family: var(--font-display, \"Chakra Petch\", sans-serif); font-weight: 600; font-size: 1.02rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--gold-bright, oklch(76% 0.165 80)); } .ds-survey-n dd { margin: 0; font-family: var(--font-serif, \"Zen Old Mincho\", Georgia, serif); font-size: 0.98rem; line-height: 1.55; color: var(--on-night, oklch(80% 0.028 175)); max-width: 62ch; }"
     },
     {
-      "name": "Map Legend",
-      "kind": "chip",
-      "refersTo": "survey-row",
-      "description": "The map's colour code printed rather than learned by clicking. Keys the non-chromatic magnitude channel as explicitly as the colours.",
-      "html": "<dl class=\"ds-legend\"><div><dt><span class=\"ds-sw ds-sw-origin\" aria-hidden=\"true\"></span>Origin</dt><dd>the component that failed</dd></div><div><dt><span class=\"ds-sw ds-sw-hit\" aria-hidden=\"true\"></span>In radius</dt><dd>goes down with it, marked +1, +2 by hop</dd></div><div><dt><span class=\"ds-sw ds-sw-clear\" aria-hidden=\"true\"></span>Clear</dt><dd>no dependency path from the origin</dd></div><div><dt><span class=\"ds-sw ds-sw-mag\" aria-hidden=\"true\"></span>Bar</dt><dd>services this component would take with it</dd></div></dl>",
-      "css": ".ds-legend { margin: 0; max-width: 30rem; border-top: 1px solid var(--line, oklch(73% 0.055 77)); } .ds-legend > div { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 0.5rem 1rem; align-items: baseline; padding-block: 0.6rem; border-bottom: 1px solid var(--line, oklch(73% 0.055 77)); } .ds-legend dt { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink, oklch(18% 0.035 82)); } .ds-legend dd { margin: 0; font-family: var(--font-serif, \"Zen Old Mincho\", Georgia, serif); font-size: 0.92rem; line-height: 1.45; color: var(--ink-soft, oklch(32% 0.045 80)); } .ds-sw { width: 13px; height: 13px; flex: none; border: 1px solid var(--ink, oklch(18% 0.035 82)); } .ds-sw-origin { background: var(--sun, oklch(64% 0.19 43)); border-color: var(--sun-deep, oklch(46% 0.165 37)); } .ds-sw-hit { background: var(--gold, oklch(68% 0.145 74)); border-color: var(--sun-deep, oklch(46% 0.165 37)); } .ds-sw-clear { background: transparent; border-color: var(--ash, oklch(42% 0.04 80)); } .ds-sw-mag { height: 4px; align-self: center; background: linear-gradient(90deg, var(--sun, oklch(64% 0.19 43)) 60%, transparent 60%); border-color: var(--ash, oklch(42% 0.04 80)); }"
-    },
-    {
-      "name": "The Plate",
+      "name": "Pricing Tier",
       "kind": "card",
-      "refersTo": "plate",
-      "description": "The only lifted surface in the system: night ground, zero radius, hairline-ruled head and foot, carrying the plate-lift shadow.",
-      "html": "<div class=\"ds-plate\"><div class=\"ds-plate-head\"><span>Dependency map — <b>checkout</b> cluster</span><span>Select a component to trace impact</span><span class=\"ds-head-state\">Origin <span class=\"ds-o\">checkout-api</span> · <span class=\"ds-n\">6</span> services in radius</span></div><div class=\"ds-plate-body\">map</div><div class=\"ds-plate-readout\"><ol><li><span class=\"ds-k\">+1</span><span class=\"ds-v\">payments-api</span></li><li><span class=\"ds-k\">+2</span><span class=\"ds-v\">ledger</span></li></ol></div></div>",
-      "css": ".ds-plate { position: relative; background: var(--night, oklch(17% 0.035 185)); box-shadow: 0 28px 90px oklch(24% 0.05 75 / 0.22); padding: 1.1rem 1.1rem 0; border-radius: 0; overflow: clip; } .ds-plate-head { display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; justify-content: space-between; align-items: baseline; padding-bottom: 0.9rem; border-bottom: 1px solid var(--night-line, oklch(34% 0.045 175)); font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.8rem; letter-spacing: 0.04em; color: var(--on-night-soft, oklch(68% 0.03 175)); font-variant-numeric: tabular-nums; } .ds-plate-head b { color: var(--gold-bright, oklch(76% 0.165 80)); font-weight: 500; } .ds-head-state { flex-basis: 100%; color: var(--rice, oklch(97% 0.02 82)); } .ds-o { color: var(--sun, oklch(64% 0.19 43)); } .ds-n { color: var(--gold-bright, oklch(76% 0.165 80)); } .ds-plate-body { min-height: 8rem; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.8rem; color: var(--on-night-soft, oklch(68% 0.03 175)); } .ds-plate-readout { border-top: 1px solid var(--night-line, oklch(34% 0.045 175)); padding: 0.85rem 0 1.1rem; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.8rem; line-height: 1.7; color: var(--on-night, oklch(80% 0.028 175)); font-variant-numeric: tabular-nums; min-height: 5.6rem; } .ds-plate-readout ol { margin: 0; padding: 0; list-style: none; } .ds-plate-readout li { display: flex; gap: 0.75rem; } .ds-k { color: var(--gold, oklch(68% 0.145 74)); white-space: nowrap; } .ds-v { color: var(--rice, oklch(97% 0.02 82)); }"
-    },
-    {
-      "name": "Dependency Map Node",
-      "kind": "custom",
-      "refersTo": "node-box",
-      "description": "The signature component's atom: a 128x34 hard rectangle with a mono label and an in-box magnitude bar sized by transitive dependent count. States are origin, in-radius (with printed hop counter), clear, hover, and focus-visible. Severity is carried by bar width and colour together, never colour alone.",
-      "html": "<svg class=\"ds-map\" viewBox=\"0 0 420 140\" role=\"application\" aria-label=\"Dependency map sample\"><path class=\"ds-edge ds-edge-hit\" d=\"M96 47 V80 H300 V93\"/><g class=\"ds-node ds-is-origin\" tabindex=\"0\" role=\"button\" aria-label=\"Trace impact from checkout-api\"><rect class=\"ds-node-box\" x=\"32\" y=\"13\" width=\"128\" height=\"34\"/><text class=\"ds-node-label\" x=\"96\" y=\"29\" text-anchor=\"middle\">checkout-api</text><text class=\"ds-node-hop\" x=\"156\" y=\"7\" text-anchor=\"end\">origin</text><rect class=\"ds-mag-track\" x=\"41\" y=\"38\" width=\"110\" height=\"3\"/><rect class=\"ds-mag-fill\" x=\"41\" y=\"38\" width=\"88\" height=\"3\"/></g><g class=\"ds-node ds-is-hit\" tabindex=\"0\" role=\"button\" aria-label=\"Trace impact from payments-api\"><rect class=\"ds-node-box\" x=\"236\" y=\"93\" width=\"128\" height=\"34\"/><text class=\"ds-node-label\" x=\"300\" y=\"109\" text-anchor=\"middle\">payments-api</text><text class=\"ds-node-hop\" x=\"360\" y=\"87\" text-anchor=\"end\">+1</text><rect class=\"ds-mag-track\" x=\"245\" y=\"118\" width=\"110\" height=\"3\"/><rect class=\"ds-mag-fill\" x=\"245\" y=\"118\" width=\"44\" height=\"3\"/></g></svg>",
-      "css": ".ds-map { display: block; width: 100%; height: auto; background: var(--night, oklch(17% 0.035 185)); } .ds-node { cursor: pointer; } .ds-node-box { fill: var(--night-soft, oklch(24% 0.04 170)); stroke: var(--night-line, oklch(34% 0.045 175)); stroke-width: 1; transition: fill 380ms cubic-bezier(0.16,1,0.3,1), stroke 380ms cubic-bezier(0.16,1,0.3,1); } .ds-node-label { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 11px; font-weight: 500; letter-spacing: 0.02em; fill: var(--on-night, oklch(80% 0.028 175)); pointer-events: none; } .ds-node-hop { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 11.5px; letter-spacing: 0.04em; fill: var(--gold-bright, oklch(76% 0.165 80)); pointer-events: none; font-variant-numeric: tabular-nums; } .ds-mag-track { fill: oklch(30% 0.03 175); } .ds-mag-fill { fill: oklch(52% 0.06 175); transition: fill 380ms cubic-bezier(0.16,1,0.3,1); } .ds-edge { fill: none; stroke: var(--night-line, oklch(34% 0.045 175)); stroke-width: 1; transition: stroke 380ms cubic-bezier(0.16,1,0.3,1), stroke-width 380ms cubic-bezier(0.16,1,0.3,1); } .ds-edge-hit { stroke: var(--gold, oklch(68% 0.145 74)); stroke-width: 1.8; } .ds-is-origin .ds-node-box { fill: var(--sun-deep, oklch(46% 0.165 37)); stroke: var(--sun, oklch(64% 0.19 43)); } .ds-is-origin .ds-node-label { fill: var(--rice, oklch(97% 0.02 82)); } .ds-is-origin .ds-mag-fill { fill: var(--sun, oklch(64% 0.19 43)); } .ds-is-origin .ds-mag-track { fill: oklch(38% 0.09 45); } .ds-is-hit .ds-node-box { fill: oklch(30% 0.07 60); stroke: var(--gold, oklch(68% 0.145 74)); } .ds-is-hit .ds-node-label { fill: var(--gold-bright, oklch(76% 0.165 80)); } .ds-is-hit .ds-mag-fill { fill: var(--gold, oklch(68% 0.145 74)); } .ds-node:hover .ds-node-box { stroke: var(--gold, oklch(68% 0.145 74)); } .ds-node:focus { outline: none; } .ds-node:focus-visible .ds-node-box { stroke: var(--focus, oklch(58% 0.18 42)); stroke-width: 2.5; }"
+      "refersTo": "tier",
+      "description": "Pricing as a ruled four-column row on night ground, never a card triptych: Roman-numeral index, gold-bright name, serif description, right-aligned mono price over an uppercase provisional unit label. A sun-coloured price note sits above the list.",
+      "html": "<section class=\"ds-night-band\"><p class=\"ds-price-note\">Provisional. These numbers are not final and will change before launch.</p><dl class=\"ds-tiers\"><div class=\"ds-tier\"><span class=\"ds-coord-n\">I</span><dt>Solo</dt><dd>One child, one caregiver. The full record, with export.</dd><span class=\"ds-price\"><span class=\"ds-amount\">$0</span><span class=\"ds-unit\">provisional</span></span></div><div class=\"ds-tier\"><span class=\"ds-coord-n\">II</span><dt>Family</dt><dd>Up to four children and two caregivers. Shared record with per-child invites.</dd><span class=\"ds-price\"><span class=\"ds-amount\">$4 / mo</span><span class=\"ds-unit\">provisional</span></span></div></dl></section>",
+      "css": ".ds-price-note { margin: 0 0 1.75rem; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.82rem; letter-spacing: 0.02em; line-height: 1.5; color: var(--sun, oklch(64% 0.19 43)); } .ds-tiers { border-top: 1px solid var(--night-line, oklch(34% 0.045 175)); margin: 0; } .ds-tier { display: grid; grid-template-columns: 4rem minmax(0, 12rem) minmax(0, 1fr) auto; gap: clamp(1rem, 2.5vw, 2.5rem); align-items: baseline; padding-block: 1.6rem; border-bottom: 1px solid var(--night-line, oklch(34% 0.045 175)); } .ds-tier .ds-coord-n { font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.75rem; letter-spacing: 0.09em; color: var(--on-night-soft, oklch(68% 0.03 175)); font-variant-numeric: tabular-nums; } .ds-tier dt { font-family: var(--font-display, \"Chakra Petch\", sans-serif); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--gold-bright, oklch(76% 0.165 80)); } .ds-tier dd { margin: 0; font-family: var(--font-serif, \"Zen Old Mincho\", Georgia, serif); color: var(--on-night, oklch(80% 0.028 175)); font-size: 0.98rem; line-height: 1.55; max-width: 52ch; } .ds-price { text-align: right; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-amount { display: block; font-size: 1.05rem; color: var(--rice, oklch(97% 0.02 82)); letter-spacing: 0.02em; } .ds-unit { display: block; margin-top: 0.25rem; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-night-dim, oklch(70% 0.025 175)); } @media (max-width: 760px) { .ds-tier { grid-template-columns: 1fr auto; row-gap: 0.35rem; } .ds-tier dd { grid-column: 1 / -1; } }"
     },
     {
       "name": "Coordinate Rail",
       "kind": "custom",
       "refersTo": "nav-link",
-      "description": "The governing vertical axis: a mono uppercase sheet label in the left margin with a fading hairline tail. Turns into a horizontal sheet stamp below 1080px rather than disappearing.",
-      "html": "<p class=\"ds-rail\" aria-hidden=\"true\">Dependency survey — sheet 01</p>",
-      "css": ".ds-rail { writing-mode: vertical-rl; margin: 0; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--ash, oklch(42% 0.04 80)); font-variant-numeric: tabular-nums; } .ds-rail::after { content: \"\"; display: block; width: 1px; height: 5.5rem; margin: 1.2rem auto 0; background: linear-gradient(var(--line, oklch(73% 0.055 77)), transparent); } @media (max-width: 1080px) { .ds-rail { writing-mode: horizontal-tb; letter-spacing: 0.28em; margin: 0 0 1.5rem; } .ds-rail::after { width: 3.5rem; height: 1px; margin: 0.9rem 0 0; background: linear-gradient(90deg, var(--line, oklch(73% 0.055 77)), transparent); } }"
+      "description": "The spread's margin stamp: a mono uppercase sheet label in the outer margin with a fading hairline tail. Turns into a horizontal sheet stamp with a top rule below 1080px, trailing the spread; never rises above the headline.",
+      "html": "<p class=\"ds-rail\" aria-hidden=\"true\">Record &mdash; leaf 01</p>",
+      "css": ".ds-rail { writing-mode: vertical-rl; margin: 0; font-family: var(--font-mono, \"Azeret Mono\", ui-monospace, monospace); font-size: 0.72rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--ash, oklch(42% 0.04 80)); font-variant-numeric: tabular-nums; } .ds-rail::after { content: \"\"; display: block; width: 1px; height: 5.5rem; margin: 1.2rem auto 0; background: linear-gradient(var(--line, oklch(73% 0.055 77)), transparent); } @media (max-width: 1080px) { .ds-rail { writing-mode: horizontal-tb; letter-spacing: 0.28em; margin: clamp(2rem, 5vw, 3rem) 0 0; padding-top: 1.1rem; border-top: 1px solid var(--line, oklch(73% 0.055 77)); } .ds-rail::after { display: none; } }"
     }
   ],
   "narrative": {
-    "northStar": "The Surveyor's Plate",
-    "overview": "Blastradius is drawn, not laid out. The page behaves like a large architecture sheet: ochre survey paper with a 112px grid ruled across it, a multiply grain sitting over the whole surface, and a single dark plate pinned onto it carrying the dependency map. Nothing floats, nothing rounds, nothing glows. Structure is made of hairlines and registration, and the reader's eye is trained by coordinates (01 / SLO, 06 / DEP) rather than by boxes.\n\nThe world is Neo Mirai, pinned by the user and copied at the token level rather than paraphrased — the OKLCH values in :root are the canonical source and the frontmatter holds them unconverted. It replaced a previous Bricolage Grotesque / IBM Plex / blue identity wholesale; that earlier system is anti-reference, not authority, and nothing from it survives in this build. The material range is deliberately wide and saturated: ochre paper, deep teal night, gold, burnt sun. Softening it toward cream-and-serif is the one move the world cannot absorb.\n\nThe type pairing is the second surprise and it is intentional: oversized Chakra Petch at weight 300 in uppercase, over Zen Old Mincho body copy — a serif with old-book weight distribution that is unusual for an ops product and gives the technical content a drawn, printed register. Azeret Mono carries everything numeric. Density is high but rhythmically ruled: long survey rows on hairlines, wide bands of vertical air between sections, and an alternating paper -> night -> paper -> night -> paper cadence where the night owns whole regions instead of tinting accents.",
+    "northStar": "The Ledger Spread",
+    "overview": "Kith is an open book, not a landing page. The first viewport is a two-leaf spread bound at a centre gutter — a single 1px hairline that is the page's governing vertical axis, the line every element registers to. The left leaf sits on ochre survey paper and carries the pitch: an oversized uppercase headline, one serif line beneath it, the primary action inline, a mono note at the foot, and a coordinate rail stamped down the outer margin. The right leaf is the one lifted surface in the whole build — a teal-night plate carrying a synthetic, clearly-labelled dated ledger of one child's record. Nothing floats, nothing rounds, nothing glows. Structure is hairlines and registration; the eye is trained by coordinates (01 / HEALTH, A / FORM) and by dated rows, not by boxes.\n\nThe world is Neo Mirai, pinned by the user and inherited unchanged when the product pivoted to Kith. The OKLCH values in :root are the canonical source and the frontmatter holds them unconverted. The material range is deliberately wide and saturated: ochre paper, deep teal night, survey gold, burnt sun. Softening it toward cream-and-serif because Kith is a family product is the one move the world cannot absorb — the ochre is a saturated world's paper, not a beige theme, and it is only legitimate with the teal, gold, and sun present around it.\n\nThe type pairing is intentional and slightly against type for a consumer product: oversized Chakra Petch at weight 300 in uppercase over Zen Old Mincho body copy — a serif with old-book weight distribution — with Azeret Mono carrying every date, dose, coordinate, price, and identifier. Density is high but rhythmically ruled: dated ledger rows and long survey rows on hairlines, wide bands of vertical air between sections, and a paper -> night -> paper -> night -> paper cadence where the night owns whole regions instead of tinting accents. One authored motion moment: the ledger wipes open from the gutter on first view.",
     "keyCharacteristics": [
+      "Two-leaf spread bound at a centre-gutter hairline that is the governing vertical axis",
       "Ochre paper ground under a 112px survey grid and a fixed multiply grain layer",
       "Zero border-radius anywhere; hairline 1px rules are the only dividers",
-      "Flat by default with tonal layering; exactly one lifted surface (the plate)",
+      "Flat by default with tonal layering; exactly one lifted surface (the record leaf)",
       "Alternating paper and full-bleed teal-night sections, never tinted accents",
-      "Oversized uppercase Chakra Petch display over Zen Old Mincho body, Azeret Mono telemetry",
-      "Severity carried by size and colour together, never by colour alone",
-      "Ruled survey rows (coordinate / term / definition) as the universal list primitive"
+      "Oversized uppercase Chakra Petch display over Zen Old Mincho body, Azeret Mono for all data",
+      "Record state carried by light and by the printed date together, never by colour alone",
+      "Ruled rows — coordinate / term / definition, or date / domain / entry — as the universal list primitive"
     ],
     "rules": [
-      { "name": "The Full Range Rule", "body": "The ochre ground is only legitimate with the rest of the world present. Any surface using --paper must also carry the teal night, the gold, and the burnt sun. Ochre plus a serif and nothing else is the failure mode this palette was pinned to avoid — the ground is a saturated world's paper, not a beige theme.", "section": "colors" },
-      { "name": "The Single-Ink Rule", "body": "Night teal owns whole regions. A section is entirely paper or entirely night; night never appears as a tinted card, a stripe, or an accent block inside a paper section.", "section": "colors" },
-      { "name": "The Size-And-Colour Rule", "body": "Severity is never carried by colour alone. Every state that uses gold or sun also changes something non-chromatic — the magnitude bar's width, the stroke weight, a printed hop counter, or a word in the readout.", "section": "colors" },
-      { "name": "The Inverted Heading Rule", "body": "The large display line comes first and the small serif line sits beneath it. Nothing precedes a heading. Annotations that would conventionally be an eyebrow — .role-note's \"Primary audience\" — are set after their block, in mono, deliberately. This world has no kicker position and never invents one.", "section": "typography" },
-      { "name": "The Telemetry Mono Rule", "body": "Every figure, coordinate, identifier, timestamp, and machine state is set in Azeret Mono with font-variant-numeric: tabular-nums. Prose is never mono; numbers are never serif.", "section": "typography" },
-      { "name": "The Measure Rule", "body": "Mincho body copy always carries an explicit max-width in ch (34-62ch depending on role). An unbounded serif paragraph is out of system.", "section": "typography" },
-      { "name": "The Survey Grid Rule", "body": "112px is the page's only spatial module. Grid overlays, on paper or on night, are drawn at --grid and never at a second interval.", "section": "layout" },
-      { "name": "The Ruled List Rule", "body": "Multi-item content is a survey — coordinate, term, definition, on hairlines. The three-up card triptych does not exist in this system; the signal list and the deploy list use the identical grammar on opposite grounds.", "section": "layout" },
-      { "name": "The One Lifted Surface Rule", "body": "A screen gets at most one shadowed object, and it is the plate. Everything else — cards, rows, headers, buttons, the map's own nodes — sits flat on its ground and is separated by hairline rules or by tone.", "section": "elevation" }
+      { "name": "The Full Range Rule", "body": "The ochre ground is only legitimate with the rest of the world present. Any surface using --paper must also carry the teal night, the gold, and the burnt sun. Ochre plus a serif and nothing else is the failure mode this palette was pinned to avoid — the ground is a saturated world's paper, not a beige theme, and being a product about children is not licence to soften it.", "section": "colors" },
+      { "name": "The Single-Ink Rule", "body": "Night teal owns whole regions. A section is entirely paper or entirely night; the record leaf is night edge to edge. Night never appears as a tinted card, a stripe, or an accent block inside a paper section.", "section": "colors" },
+      { "name": "The Size-And-Colour Rule", "body": "Record state is never carried by colour alone. A freshly-kept row carries a bright gold domain tag; a long-untouched row dims its domain and metadata toward the ground — but the entry text stays fully legible and every row prints its date, so the state is always doubled by something non-chromatic. The one due row adds the literal word DUE, set uppercase with wider tracking, alongside the sun colour.", "section": "colors" },
+      { "name": "The Inverted Heading Rule", "body": "The large display line comes first and the small serif line sits beneath it. Nothing precedes a heading. The coordinate rail (\"Record — leaf 01\") is a vertical margin stamp on desktop and a trailing sheet stamp below the spread on mobile — it is never a kicker or eyebrow above the headline. This world has no kicker position and never invents one.", "section": "typography" },
+      { "name": "The Telemetry Mono Rule", "body": "Every date, dose, domain coordinate, price, tally, and identifier is set in Azeret Mono with font-variant-numeric: tabular-nums. Prose is never mono; dates and doses are never serif.", "section": "typography" },
+      { "name": "The Measure Rule", "body": "Mincho body copy always carries an explicit max-width in ch: 18ch hero lead, 40ch hero summary, 48ch band-head copy, 62ch survey definitions, 52ch tier descriptions, 46ch close copy, 56ch contact copy, 34ch record-leaf caption and left-leaf foot note. An unbounded serif paragraph is out of system.", "section": "typography" },
+      { "name": "The Survey Grid Rule", "body": "112px is the page's only spatial module. Grid overlays, on paper (grid-paper) or on night (grid-night), are drawn at --grid and never at a second interval.", "section": "layout" },
+      { "name": "The Ruled List Rule", "body": "Multi-item content is a ruled row set — a coordinate or index, a term, a definition, on hairlines. The three-up card triptych does not exist in this system: the What-it-keeps list, the trigger-moments list, and the pricing tiers all use the identical grammar, pricing included (a right-aligned mono price is a fourth column, never a card).", "section": "layout" },
+      { "name": "The Binding Axis Rule", "body": "The spread has one governing vertical axis — the centre-gutter hairline — and every element in the first viewport registers to it. When the spread stacks, the axis becomes a horizontal rule between the leaves; it is never dropped.", "section": "layout" },
+      { "name": "The One Lifted Surface Rule", "body": "A screen gets at most one shadowed object, and it is the record leaf. Everything else — the left leaf, rows, header, buttons, tags — sits flat on its ground and is separated by hairline rules or by tone.", "section": "elevation" }
     ],
     "dos": [
       "Do carry the full material range on every surface — ochre paper, teal night, gold, and burnt sun together (The Full Range Rule).",
-      "Do give night teal whole sections, and alternate paper -> night -> paper as the section rhythm.",
+      "Do bind the first viewport to one centre-gutter axis and register every element to it; keep the axis as a rule when the spread stacks.",
+      "Do give night teal whole sections and the whole record leaf, and alternate paper -> night -> paper as the section rhythm.",
       "Do draw structure with 1px hairlines in --line on paper and --night-line on night, and keep every corner at 0 radius.",
-      "Do use the ruled survey row — coordinate, term, definition — as the list primitive on both grounds.",
-      "Do encode severity with size and colour together: a bar width, a stroke weight, or a printed hop count alongside every gold or sun state.",
-      "Do set all figures, coordinates, and machine states in Azeret Mono with tabular figures, and all prose in Zen Old Mincho with an explicit ch measure.",
-      "Do put the large display line first and the small serif line beneath it; place annotations after their block.",
-      "Do theme browser surfaces from the palette — selection, scrollbar, and a 3px --focus ring at 4px offset.",
+      "Do carry the inherited grain (grain-light / grain-mid / grain-warm), the warm bloom at top-right, and the 112px grid rulings (grid-paper / grid-night) as the only decorative layers; they never take content.",
+      "Do use the ruled row — coordinate / term / definition, or date / domain / entry — as the list primitive on both grounds, pricing included.",
+      "Do double every record-state signal with something non-chromatic: a legible entry, a printed date, or the literal word DUE.",
+      "Do set every date, dose, domain coordinate, price, and identifier in Azeret Mono with tabular figures, and all prose in Zen Old Mincho with an explicit ch measure.",
+      "Do put the large display line first and the small serif line beneath it; keep the coordinate rail in the margin or trailing, never above the heading.",
+      "Do label synthetic demo data as synthetic in the leaf head and restate it in the foot; label provisional pricing as provisional.",
       "Do keep the 112px survey grid as the only spatial module, on paper and on night alike.",
-      "Do print state as content in the plate head and a polite live readout, not as a floating badge."
+      "Do animate the ledger as one orchestrated wipe from the gutter on first view; collapse it under reduced motion."
     ],
     "donts": [
-      "Don't soften the world to cream-and-serif. Ochre without the teal, gold, and sun around it is out of system.",
-      "Don't add a second shadow. The plate is the only lifted surface; everything else is flat with tonal layering.",
+      "Don't soften the world to cream-and-serif because Kith is about children. Ochre without the teal, gold, and sun around it is out of system.",
+      "Don't add a second shadow. The record leaf is the only lifted surface; everything else is flat with tonal layering.",
       "Don't round anything. No radius token exists above 0.",
       "Don't use night teal as an accent tint, a stripe, or a coloured card inside a paper section.",
-      "Don't convey severity or state by colour alone — the accessibility commitment requires a second, non-chromatic channel.",
+      "Don't convey record state by colour alone — the accessibility commitment requires a printed date or word alongside it.",
       "Don't place a kicker or eyebrow above a heading. The inverted hierarchy is the world's own device and there is no eyebrow position to fill.",
-      "Don't build a three-up feature-card triptych. Multi-item content is a ruled survey.",
-      "Don't set body prose in mono or figures in the serif, and don't let a Mincho paragraph run without a ch cap.",
-      "Don't shrink map type to fit a viewport; the map pans at its legible size instead.",
-      "Don't reintroduce anything from the retired identity (Bricolage Grotesque, IBM Plex, blue #2f4fd6) — it is anti-reference, not heritage."
+      "Don't build a three-up feature-card triptych or a pricing-card row. Multi-item content is a ruled row set.",
+      "Don't set body prose in mono or dates in the serif, and don't let a Mincho paragraph run without a ch cap.",
+      "Don't stagger the ledger rows individually; the wipe is a single unfold with no per-row timing.",
+      "Don't put a button in the header. The header carries the wordmark, anchors, and an underlined login link only."
     ]
   }
 }

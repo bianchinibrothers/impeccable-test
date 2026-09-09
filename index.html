@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blastradius — the architecture portal for on-call SREs</title>
-<meta name="description" content="Blastradius draws the system you run and shows what a failing component takes down with it, before it takes it down.">
+<title>Kith — a private record for one childhood</title>
+<meta name="description" content="Kith keeps the structured history of your child's life — immunizations, school, the friends they love, the preferences a new sitter needs — in one place that is yours to export.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600&family=Zen+Old+Mincho:wght@400;600;900&family=Azeret+Mono:wght@400;500;600&display=swap">
+<script>document.documentElement.className = "js";</script>
 <style>
   :root {
     color-scheme: light;
@@ -33,6 +34,7 @@
     --night-line: oklch(34% 0.045 175);
     --on-night: oklch(80% 0.028 175);
     --on-night-soft: oklch(68% 0.03 175);
+    --on-night-dim: oklch(70% 0.025 175);
 
     --focus: oklch(58% 0.18 42);
     --plate-shadow: 0 28px 90px oklch(24% 0.05 75 / 0.22);
@@ -149,37 +151,38 @@
     transition: color 200ms var(--ease), border-color 200ms var(--ease);
   }
   .site-nav a:hover { color: var(--ink); border-bottom-color: var(--sun); }
-  .header-status {
+  .header-login {
+    justify-self: end;
     font-family: var(--font-mono);
-    font-size: 0.74rem; letter-spacing: 0.02em;
-    color: var(--ash);
-    font-variant-numeric: tabular-nums;
-    font-feature-settings: "tnum" 1;
-    white-space: nowrap;
-    /* a rule and an indent, so this reads as instrument annotation and not a nav item */
-    padding-left: 1.1rem;
-    border-left: 1px solid var(--line);
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink);
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--line);
+    transition: color 200ms var(--ease), border-color 200ms var(--ease);
   }
+  .header-login:hover { color: var(--sun-deep); border-bottom-color: var(--sun); }
 
-  /* ---------- hero ---------- */
-  .hero {
+  /* ---------- the spread (hero) ---------- */
+  .spread-wrap {
     position: relative;
     padding-top: calc(var(--header-height) + clamp(2rem, 4.5vw, 4rem));
     padding-bottom: clamp(3rem, 6vw, 6rem);
     border-bottom: 1px solid var(--line);
   }
-  .hero-grid {
+  .spread {
+    position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
-    gap: clamp(2rem, 4.5vw, 4.5rem);
-    align-items: start;
+    grid-template-columns: minmax(0, 0.92fr) 1px minmax(0, 1.08fr);
+    column-gap: clamp(1.75rem, 4vw, 3.75rem);
+    align-items: stretch;
   }
-  /* grid items default to min-width:auto, which lets the map's min-width widen the page */
-  .hero-grid > * { min-width: 0; }
-  /* the plate spans both rows so the legend lands in the void under the copy;
-     below 1080px placement falls back to DOM order, which puts it after the plate */
-  .hero-grid .plate { grid-column: 2; grid-row: 1 / span 2; }
-  .hero-grid .legend { grid-column: 1; grid-row: 2; }
+  /* the binding: one governing vertical axis every element registers to */
+  .spread .gutter {
+    align-self: stretch;
+    width: 1px;
+    background: linear-gradient(var(--line) 62%, transparent);
+    margin-block: 0.4rem;
+  }
 
   .rail {
     position: absolute;
@@ -201,9 +204,10 @@
     background: linear-gradient(var(--line), transparent);
   }
 
-  .hero h1 {
+  .leaf-a { padding-top: 0.25rem; display: flex; flex-direction: column; }
+  .leaf-a h1 {
     margin: 0;
-    max-width: 6em;
+    max-width: 7em;
     font-family: var(--font-display);
     font-weight: 300;
     font-size: clamp(3.1rem, 6.9vw, 6.4rem);
@@ -212,27 +216,27 @@
     text-transform: uppercase;
     text-wrap: balance;
   }
-  .hero h1 span { display: block; }
-  .hero h1 .radius { color: var(--sun-deep); }
+  .leaf-a h1 span { display: block; }
+  .leaf-a h1 .accent { color: var(--sun-deep); }
 
-  .hero-place {
+  .leaf-lead {
     margin: 1rem 0 0;
-    max-width: 15ch;
+    max-width: 18ch;
     font-family: var(--font-serif);
     font-weight: 400;
     font-size: clamp(1.25rem, 2.1vw, 1.85rem);
     line-height: 1.2;
     color: var(--ink);
   }
-  .hero-summary {
-    max-width: 34ch;
+  .leaf-summary {
+    max-width: 40ch;
     margin: 1.15rem 0 0;
     color: var(--ink-soft);
-    font-size: clamp(1rem, 1.15vw, 1.12rem);
-    line-height: 1.5;
+    font-size: 1.05rem;
+    line-height: 1.55;
   }
 
-  .hero-actions {
+  .leaf-actions {
     display: flex; flex-wrap: wrap; align-items: center;
     gap: 1.5rem;
     margin-top: clamp(1.75rem, 3vw, 2.5rem);
@@ -258,55 +262,29 @@
   }
   .action-quiet:hover { color: var(--sun-deep); border-bottom-color: var(--sun); }
 
-  /* legend — the map's colour code, printed rather than learned by clicking */
-  /* third grid child: sits under the copy on desktop, after the plate on mobile,
-     so the key never arrives before the map it keys */
-  .legend {
-    grid-column: 1;
-    margin: clamp(2rem, 3.5vw, 3.25rem) 0 0;
-    max-width: 30rem;
+  /* seats at the foot of the left leaf so the spread reads full-height to the binding */
+  .leaf-foot {
+    margin: auto 0 0;
+    padding-top: clamp(2rem, 4vw, 3.25rem);
     border-top: 1px solid var(--line);
-  }
-  .legend > div {
-    display: grid;
-    grid-template-columns: 8.5rem minmax(0, 1fr);
-    gap: 0.5rem 1rem;
-    align-items: baseline;
-    padding-block: 0.6rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .legend dt {
-    display: flex; align-items: center; gap: 0.55rem;
+    max-width: 34ch;
     font-family: var(--font-mono);
-    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--ink);
-  }
-  .legend dd {
-    margin: 0;
-    font-size: 0.92rem;
-    line-height: 1.45;
-    color: var(--ink-soft);
-  }
-  .legend .sw { width: 13px; height: 13px; flex: none; border: 1px solid var(--ink); }
-  .legend .sw-origin { background: var(--sun); border-color: var(--sun-deep); }
-  .legend .sw-hit { background: var(--gold); border-color: var(--sun-deep); }
-  .legend .sw-clear { background: transparent; border-color: var(--ash); }
-  .legend .sw-mag {
-    height: 4px; align-self: center;
-    background: linear-gradient(90deg, var(--sun) 60%, transparent 60%);
-    border-color: var(--ash);
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    line-height: 1.65;
+    color: var(--ash);
   }
 
-  /* ---------- the plate ---------- */
-  .plate {
+  /* ---------- the record leaf (the one lifted surface) ---------- */
+  .leaf-b {
     position: relative;
     background: var(--night);
     box-shadow: var(--plate-shadow);
-    padding: 1.1rem 1.1rem 0;
+    padding: 1.1rem 1.2rem 0;
     overflow: clip;
   }
-  .plate-head {
-    display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem;
+  .leaf-b-head {
+    display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem;
     justify-content: space-between; align-items: baseline;
     padding-bottom: 0.9rem;
     border-bottom: 1px solid var(--night-line);
@@ -315,89 +293,93 @@
     color: var(--on-night-soft);
     font-variant-numeric: tabular-nums;
   }
-  .plate-head b { color: var(--gold-bright); font-weight: 500; }
-  /* the trace reports itself in the head, so the verdict is legible above the fold */
-  .head-state { flex-basis: 100%; color: var(--rice); }
-  .head-state .o { color: var(--sun); }
-  .head-state .n { color: var(--gold-bright); }
-  .plate figure { margin: 0; }
-  /* the map keeps its legible size and scrolls rather than shrinking its labels */
-  .map-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
-  .pan-hint { display: none; color: var(--gold); }
-  @media (max-width: 1080px) { .pan-hint { display: inline; } }
-  /* min-width matches the viewBox width exactly, so the map never paints below 1:1
-     and its in-SVG type keeps the size it declares */
-  .plate svg.map { display: block; width: 100%; min-width: 640px; height: auto; }
+  .leaf-b-head b { color: var(--gold-bright); font-weight: 500; }
+  .leaf-b-head .tag {
+    color: var(--on-night-dim);
+    border: 1px solid var(--night-line);
+    padding: 0.15rem 0.5rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    font-size: 0.72rem;
+  }
 
-  .node-box {
-    fill: var(--night-soft);
-    stroke: var(--night-line);
-    stroke-width: 1;
-    transition: fill 380ms var(--ease), stroke 380ms var(--ease);
+  .ledger { margin: 0; }
+  .ledger-row {
+    display: grid;
+    grid-template-columns: 6.1rem 4.4rem minmax(0, 1fr);
+    gap: 0.35rem 1rem;
+    align-items: baseline;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--night-line);
   }
-  .node-label {
+  .ledger-row .when {
     font-family: var(--font-mono);
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 0.02em;
-    fill: var(--on-night);
-    transition: fill 380ms var(--ease);
-    pointer-events: none;
-  }
-  .node-hop {
-    font-family: var(--font-mono);
-    font-size: 11.5px; letter-spacing: 0.04em;
-    fill: var(--gold-bright);
-    opacity: 0;
-    transition: opacity 300ms var(--ease);
-    pointer-events: none;
+    font-size: 0.76rem; letter-spacing: 0.02em;
+    color: var(--on-night-soft);
     font-variant-numeric: tabular-nums;
   }
-  .mag-track { fill: oklch(30% 0.03 175); }
-  .mag-fill { fill: oklch(52% 0.06 175); transition: fill 380ms var(--ease); }
-  .node.is-hit .mag-fill { fill: var(--gold); }
-  .node.is-origin .mag-fill { fill: var(--sun); }
-  .node.is-origin .mag-track { fill: oklch(38% 0.09 45); }
-
-  .edge {
-    fill: none;
-    stroke: var(--night-line);
-    stroke-width: 1;
-    transition: stroke 380ms var(--ease), stroke-width 380ms var(--ease);
-  }
-  .node { cursor: pointer; }
-  .node:focus { outline: none; }
-  .node:focus-visible .node-box { stroke: var(--focus); stroke-width: 2.5; }
-  .node:hover .node-box { stroke: var(--gold); }
-
-  .node.is-origin .node-box { fill: var(--sun-deep); stroke: var(--sun); }
-  .node.is-origin .node-label { fill: var(--rice); }
-  .node.is-hit .node-box { fill: oklch(30% 0.07 60); stroke: var(--gold); }
-  .node.is-hit .node-label { fill: var(--gold-bright); }
-  .node.is-hit .node-hop, .node.is-origin .node-hop { opacity: 1; }
-  .node.is-clear .node-box { fill: var(--night-soft); stroke: var(--night-line); }
-  .node.is-clear .node-label { fill: oklch(66% 0.022 175); }
-  .edge.is-hit { stroke: var(--gold); stroke-width: 1.8; }
-
-  .plate-readout {
-    border-top: 1px solid var(--night-line);
-    padding: 0.85rem 0 1.1rem;
+  .ledger-row .dom {
     font-family: var(--font-mono);
-    font-size: 0.8rem; line-height: 1.7;
+    font-size: 0.7rem; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .ledger-row .entry {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.5;
     color: var(--on-night);
-    font-variant-numeric: tabular-nums;
-    min-height: 5.6rem;
   }
-  .plate-readout ol { margin: 0; padding: 0; list-style: none; }
-  .plate-readout li { display: flex; gap: 0.75rem; }
-  .plate-readout .k { color: var(--gold); white-space: nowrap; }
-  .plate-readout .v { color: var(--rice); }
-  .plate-readout .sev { color: var(--sun); }
-  .plate-caption {
-    margin: 0.85rem 0 0;
+  .ledger-row .kept {
+    display: block;
+    margin-top: 0.3rem;
     font-family: var(--font-mono);
-    font-size: 0.8rem; letter-spacing: 0.03em;
+    font-size: 0.72rem; letter-spacing: 0.06em;
+    color: var(--on-night-dim);
+    font-variant-numeric: tabular-nums;
+  }
+  /* tending the record is visible as light: a freshly-kept row carries a bright
+     gold domain tag and timestamp, a long-untouched one dims toward the ground.
+     The entry text itself stays fully legible; the fade rides the metadata, and
+     the state is always doubled by the printed date. */
+  .ledger-row.is-aging .dom { color: var(--on-night-soft); }
+  .ledger-row.is-aging .kept { color: var(--on-night-dim); }
+  .ledger-row.is-stale .dom { color: var(--on-night-dim); }
+  .ledger-row.is-stale .kept { color: var(--on-night-dim); }
+  /* the one thing due: size, word, and colour together */
+  .ledger-row.is-due .when,
+  .ledger-row.is-due .dom { color: var(--sun); }
+  .ledger-row.is-due .entry { color: var(--rice); }
+  .ledger-row.is-due .kept { color: var(--sun); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .leaf-b-foot {
+    border-top: 1px solid var(--night-line);
+    padding: 0.85rem 0 1.15rem;
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem;
+    justify-content: space-between; align-items: baseline;
+  }
+  .leaf-b-foot .caption {
+    margin: 0;
+    max-width: 34ch;
+    font-family: var(--font-mono);
+    font-size: 0.74rem; letter-spacing: 0.02em;
+    line-height: 1.5;
     color: var(--on-night-soft);
   }
+  .leaf-b-foot .tally {
+    font-family: var(--font-mono);
+    font-size: 0.74rem; letter-spacing: 0.03em;
+    color: var(--on-night);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .leaf-b-foot .tally .due { color: var(--sun); }
+
+  /* the one authored moment: the whole record wipes open from the gutter on
+     first view — a single orchestrated unfold, no per-row stagger */
+  html.js .ledger {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 820ms var(--ease);
+  }
+  html.js .ledger.is-open { clip-path: inset(0 0 0 0); }
 
   /* ---------- generic section ---------- */
   .band { padding-block: clamp(3.5rem, 7vw, 7rem); border-bottom: 1px solid var(--line); }
@@ -412,18 +394,18 @@
     text-transform: uppercase;
   }
   .band-head p {
-    max-width: 46ch;
-    margin: 0.85rem 0 0;
+    max-width: 48ch;
+    margin: 0.9rem 0 0;
     font-size: 1.05rem;
-    line-height: 1.5;
+    line-height: 1.55;
     color: var(--ink-soft);
   }
 
-  /* ---------- signal survey ---------- */
+  /* ---------- ruled survey (the universal list primitive) ---------- */
   .survey { border-top: 1px solid var(--line); }
   .survey-row {
     display: grid;
-    grid-template-columns: 5.5rem minmax(0, 15rem) minmax(0, 1fr);
+    grid-template-columns: 6.5rem minmax(0, 15rem) minmax(0, 1fr);
     gap: clamp(1rem, 2.5vw, 2.5rem);
     align-items: baseline;
     padding-block: 1.4rem;
@@ -447,32 +429,6 @@
     max-width: 62ch;
   }
 
-  /* ---------- roles: asymmetric, not equal cards ---------- */
-  .roles {
-    display: grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: start;
-  }
-  .role-major h3, .role-minor h3 {
-    margin: 0 0 0.7rem;
-    font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-  .role-major h3 { font-size: 1.5rem; }
-  .role-minor h3 { font-size: 1.05rem; color: var(--ink-soft); }
-  .role-major p, .role-minor p { margin: 0 0 1rem; max-width: 60ch; line-height: 1.55; }
-  .role-major p { font-size: 1.08rem; }
-  .role-minor { padding-left: clamp(1rem, 2vw, 2rem); border-left: 1px solid var(--line); }
-  .role-minor p { font-size: 0.97rem; color: var(--ink-soft); }
-  .role-note {
-    font-family: var(--font-mono);
-    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--sun-deep);
-  }
-
   /* ---------- night band: single-ink commitment ---------- */
   .night-band {
     background: var(--night);
@@ -491,50 +447,95 @@
   }
   .night-band > * { position: relative; }
   .night-band h2 { color: var(--rice); }
-  .night-band .band-head p { color: oklch(80% 0.025 175); }
-  /* same ruled-survey grammar as the signal list, not a three-up card triptych */
-  .deploy { border-top: 1px solid var(--night-line); }
-  .deploy > div {
-    display: grid;
-    grid-template-columns: 5.5rem minmax(0, 15rem) minmax(0, 1fr);
-    gap: clamp(1rem, 2.5vw, 2.5rem);
-    align-items: baseline;
-    padding-block: 1.4rem;
-    border-bottom: 1px solid var(--night-line);
-  }
-  .deploy .coord {
-    font-family: var(--font-mono);
-    font-size: 0.75rem; letter-spacing: 0.09em; text-transform: uppercase;
-    color: var(--on-night-soft);
-    font-variant-numeric: tabular-nums;
-  }
-  .deploy dt {
-    font-family: var(--font-display);
-    font-weight: 600; font-size: 1.02rem;
-    letter-spacing: 0.02em; text-transform: uppercase;
-    color: var(--gold-bright);
-  }
-  .deploy dd { margin: 0; color: var(--on-night); font-size: 0.98rem; max-width: 62ch; }
-
-  /* survey on the night ground */
+  .night-band .band-head p { color: var(--on-night); }
   .night-band .survey { border-top-color: var(--night-line); }
   .night-band .survey-row { border-bottom-color: var(--night-line); }
   .night-band .survey-row .coord { color: var(--on-night-soft); }
   .night-band .survey-row dt { color: var(--gold-bright); }
   .night-band .survey-row dd { color: var(--on-night); }
 
+  /* ---------- pricing: ruled tiers, never a card triptych ---------- */
+  .price-note {
+    margin: 0 0 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem; letter-spacing: 0.02em;
+    line-height: 1.5;
+    color: var(--sun);
+  }
+  .tiers { border-top: 1px solid var(--night-line); }
+  .tier {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 12rem) minmax(0, 1fr) auto;
+    gap: clamp(1rem, 2.5vw, 2.5rem);
+    align-items: baseline;
+    padding-block: 1.6rem;
+    border-bottom: 1px solid var(--night-line);
+  }
+  .tier .coord {
+    font-family: var(--font-mono);
+    font-size: 0.75rem; letter-spacing: 0.09em;
+    color: var(--on-night-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .tier dt {
+    font-family: var(--font-display);
+    font-weight: 600; font-size: 1.05rem;
+    letter-spacing: 0.02em; text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+  .tier dd { margin: 0; color: var(--on-night); font-size: 0.98rem; max-width: 52ch; }
+  .tier .price {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .tier .price .amount { display: block; font-size: 1.05rem; color: var(--rice); letter-spacing: 0.02em; }
+  .tier .price .unit { display: block; margin-top: 0.25rem; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-night-dim); }
+
+  /* ---------- contact / data ---------- */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .contact-grid p { margin: 0 0 1rem; max-width: 56ch; font-size: 1.02rem; line-height: 1.55; }
+  .contact-mail {
+    font-family: var(--font-mono);
+    font-size: 0.98rem; letter-spacing: 0.02em;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.3rem;
+    transition: color 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .contact-mail:hover { color: var(--sun-deep); border-bottom-color: var(--sun); }
+  .data-note {
+    padding-left: clamp(1rem, 2vw, 2rem);
+    border-left: 1px solid var(--line);
+  }
+  .data-note h3 {
+    margin: 0 0 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 600; font-size: 1.05rem;
+    letter-spacing: 0.02em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .data-note p { font-size: 0.97rem; color: var(--ink-soft); }
+
   /* ---------- close ---------- */
   .close { text-align: left; }
   .close h2 {
     margin: 0;
-    max-width: 16ch;
+    max-width: 15ch;
     font-family: var(--font-display);
     font-weight: 300;
     font-size: clamp(2.2rem, 5.2vw, 4.4rem);
     line-height: 0.98;
     text-transform: uppercase;
   }
-  .close p { max-width: 44ch; margin: 1.1rem 0 0; color: var(--ink-soft); font-size: 1.05rem; }
+  .close p { max-width: 46ch; margin: 1.1rem 0 0; color: var(--ink-soft); font-size: 1.05rem; }
+  .close .leaf-actions { margin-top: clamp(1.75rem, 3.5vw, 2.75rem); }
 
   footer {
     padding-block: 2.25rem 3rem;
@@ -547,34 +548,49 @@
 
   /* ---------- responsive ---------- */
   @media (max-width: 1080px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-grid .plate, .hero-grid .legend { grid-column: auto; grid-row: auto; }
-    /* the governing axis turns into a sheet stamp rather than disappearing */
+    .spread-wrap { display: flex; flex-direction: column; }
+    .spread { order: 1; grid-template-columns: 1fr; row-gap: 2.5rem; }
+    .spread .gutter {
+      width: auto; height: 1px;
+      background: linear-gradient(90deg, var(--line) 62%, transparent);
+      margin-block: 0;
+    }
+    .leaf-a { display: block; }
+    .leaf-foot { margin-top: clamp(1.75rem, 5vw, 2.5rem); }
+    /* the governing axis trails the spread as a sheet stamp — never a line above the heading */
     .rail {
+      order: 2;
       position: static;
       writing-mode: horizontal-tb;
-      margin: 0 0 1.5rem;
+      margin: clamp(2rem, 5vw, 3rem) 0 0;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--line);
       letter-spacing: 0.28em;
     }
-    .rail::after { width: 3.5rem; height: 1px; margin: 0.9rem 0 0; background: linear-gradient(90deg, var(--line), transparent); }
-    .roles { grid-template-columns: 1fr; }
-    .role-minor { padding-left: 0; padding-top: 1.75rem; border-left: none; border-top: 1px solid var(--line); }
+    .rail::after { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .data-note { padding-left: 0; padding-top: 1.75rem; border-left: none; border-top: 1px solid var(--line); }
   }
   @media (max-width: 760px) {
     .site-nav { display: none; }
-    .survey-row,
-    .deploy > div { grid-template-columns: 1fr; gap: 0.35rem; padding-block: 1.15rem; }
-    .legend > div { grid-template-columns: 1fr; gap: 0.2rem; }
-    .plate { padding-inline: 0.8rem; }
-    .plate-readout { min-height: 8rem; }
+    .site-header { grid-template-columns: auto 1fr auto; }
+    .survey-row { grid-template-columns: 1fr; gap: 0.35rem; padding-block: 1.15rem; }
+    .ledger-row { grid-template-columns: 6.1rem 1fr; row-gap: 0.15rem; }
+    .ledger-row .entry { grid-column: 1 / -1; }
+    .tier { grid-template-columns: 1fr auto; row-gap: 0.35rem; }
+    .tier .coord { grid-row: 1; }
+    .tier dt { grid-row: 1; grid-column: 1; }
+    .tier .price { grid-row: 1; grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+    .tier dd { grid-column: 1 / -1; }
+    .leaf-b { padding-inline: 0.9rem; }
   }
   @media (max-width: 560px) {
-    .site-header { grid-template-columns: 1fr auto; }
-    .header-status { display: none; }
+    .site-header { grid-template-columns: 1fr auto; gap: 1rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+    html.js .ledger { clip-path: none !important; }
   }
 </style>
 </head>
@@ -583,494 +599,268 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
-  <a class="wordmark" href="#main"><span class="mark" aria-hidden="true"></span> Blastradius</a>
+  <a class="wordmark" href="#main"><span class="mark" aria-hidden="true"></span> Kith</a>
   <nav class="site-nav" aria-label="Primary">
-    <a href="#map">The map</a>
-    <a href="#signals">Signals</a>
-    <a href="#roles">Who it's for</a>
-    <a href="#run">Running it</a>
+    <a href="#about">What it keeps</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
   </nav>
-  <p class="header-status">Demo data · us-east-1 · 13 services</p>
+  <a class="header-login" href="#login">Log in</a>
 </header>
 
 <main id="main">
 
-  <!-- ============ HERO / THE PLATE ============ -->
-  <div class="hero shell" id="map">
-    <p class="rail" aria-hidden="true">Dependency survey — sheet 01</p>
+  <!-- ============ THE SPREAD ============ -->
+  <div class="spread-wrap shell" id="top">
+    <p class="rail" aria-hidden="true">Record — leaf 01</p>
 
-    <div class="hero-grid">
-      <div class="hero-copy">
+    <div class="spread">
+      <div class="leaf-a">
         <h1>
-          <span>Know your</span>
-          <span>blast</span>
-          <span class="radius">radius</span>
+          <span>One book</span>
+          <span>for one</span>
+          <span class="accent">childhood</span>
         </h1>
-        <p class="hero-place">The architecture portal for on-call SREs.</p>
-        <p class="hero-summary">
-          Blastradius draws the system you actually run, then shows you what a failing
-          component takes down with it — every dependent service, every hop, before the
-          page reaches you.
+        <p class="leaf-lead">Health, school, and the people they love.</p>
+        <p class="leaf-summary">
+          Kith keeps the structured history of your child's life. Every dose and date, every
+          teacher, every friend who matters, every preference a new sitter needs, in one place
+          that stays yours to export.
         </p>
-        <div class="hero-actions">
-          <a class="action" href="#book">
-            Book a walkthrough
+        <div class="leaf-actions">
+          <a class="action" href="#login">
+            Start the record
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <path d="M2 8h11M9 4l4 4-4 4"/>
             </svg>
           </a>
-          <a class="action-quiet" href="#signals">See what it watches</a>
+          <a class="action-quiet" href="#about">See what it keeps</a>
         </div>
+        <p class="leaf-foot">Private by default. The whole record is yours to export, or delete, at any time.</p>
       </div>
 
-      <div class="plate">
-        <div class="plate-head">
-          <span>Dependency map — <b>checkout</b> cluster</span>
-          <span>Select a component to trace impact<span class="pan-hint"> · drag the map sideways to pan</span></span>
-          <span class="head-state" id="head-state"></span>
+      <div class="gutter" aria-hidden="true"></div>
+
+      <div class="leaf-b">
+        <div class="leaf-b-head">
+          <span>Record — <b>Mira</b>, age 3</span>
+          <span class="tag">Synthetic</span>
         </div>
 
-        <figure>
-          <div class="map-scroll">
-          <svg class="map" viewBox="0 0 640 512" role="application"
-               aria-label="Interactive dependency map. Select a component to trace which services it takes down.">
-            <g id="edges"></g>
-            <g id="nodes"></g>
-          </svg>
+        <dl class="ledger" id="ledger">
+          <div class="ledger-row is-stale">
+            <dt class="when">2024-11-04</dt>
+            <dt class="dom">Vax</dt>
+            <dd class="entry">MMR, first dose. Dr. Okafor, Greenpoint Peds.
+              <span class="kept">kept 2024-11-04</span></dd>
           </div>
-          <figcaption class="plate-caption">
-            Synthetic topology shown for demonstration.
-          </figcaption>
-        </figure>
+          <div class="ledger-row is-stale">
+            <dt class="when">2025-01-12</dt>
+            <dt class="dom">Pref</dt>
+            <dd class="entry">Will not eat anything green. Peas are the exception. Peas are always fine.
+              <span class="kept">kept 2025-01-12</span></dd>
+          </div>
+          <div class="ledger-row is-aging">
+            <dt class="when">2025-02-03</dt>
+            <dt class="dom">Kith</dt>
+            <dd class="entry">Best friend at daycare is Sam R. Sam's mum is Dana, on 555 0142.
+              <span class="kept">kept 2025-02-03</span></dd>
+          </div>
+          <div class="ledger-row is-aging">
+            <dt class="when">2025-03-09</dt>
+            <dt class="dom">Schl</dt>
+            <dd class="entry">Started at Little Cedars, room 2. Teacher: Ms. Bello.
+              <span class="kept">kept 2025-03-09</span></dd>
+          </div>
+          <div class="ledger-row is-aging">
+            <dt class="when">2025-04-20</dt>
+            <dt class="dom">Hlth</dt>
+            <dd class="entry">Peanut: mild hives in February. Antihistamine on hand, no epi-pen advised (Dr. Okafor).
+              <span class="kept">kept 2025-04-20</span></dd>
+          </div>
+          <div class="ledger-row">
+            <dt class="when">2025-05-30</dt>
+            <dt class="dom">Pref</dt>
+            <dd class="entry">Settles to "Rasputin". Every single time. Do not ask why.
+              <span class="kept">kept 2025-05-30</span></dd>
+          </div>
+          <div class="ledger-row">
+            <dt class="when">2025-06-15</dt>
+            <dt class="dom">Kith</dt>
+            <dd class="entry">Cousins Theo and Ada, most Sundays at Nan's.
+              <span class="kept">kept 2025-06-15</span></dd>
+          </div>
+          <div class="ledger-row is-due">
+            <dt class="when">2025-09</dt>
+            <dt class="dom">Vax</dt>
+            <dd class="entry">4–6y booster: DTaP, IPV, MMR. Due around the 4th birthday.
+              <span class="kept">due</span></dd>
+          </div>
+        </dl>
 
-        <div class="plate-readout" id="readout" aria-live="polite"></div>
+        <div class="leaf-b-foot">
+          <p class="caption">Synthetic entries, shown to demonstrate the shape of the record. Not a real child.</p>
+          <span class="tally">7 kept · <span class="due">1 due</span></span>
+        </div>
       </div>
-
-      <dl class="legend">
-        <div><dt><span class="sw sw-origin" aria-hidden="true"></span>Origin</dt>
-             <dd>the component that failed</dd></div>
-        <div><dt><span class="sw sw-hit" aria-hidden="true"></span>In radius</dt>
-             <dd>goes down with it, marked +1, +2 by hop</dd></div>
-        <div><dt><span class="sw sw-clear" aria-hidden="true"></span>Clear</dt>
-             <dd>no dependency path from the origin</dd></div>
-        <div><dt><span class="sw sw-mag" aria-hidden="true"></span>Bar</dt>
-             <dd>services this component would take with it</dd></div>
-      </dl>
     </div>
   </div>
 
-  <!-- ============ SIGNALS ============ -->
-  <section class="band night-band shell" id="signals">
+  <!-- ============ WHAT IT KEEPS ============ -->
+  <section class="band night-band shell" id="about">
     <div class="band-head">
-      <h2>What it watches</h2>
-      <p>Five signal families, joined to the components they belong to rather than streamed into one flat feed.</p>
+      <h2>What it keeps</h2>
+      <p>Four kinds of record, each joined to your child rather than scattered across a pediatrician, a school portal, and your inbox.</p>
     </div>
 
     <dl class="survey">
       <div class="survey-row">
-        <span class="coord">01 / SLO</span>
-        <dt>SLO &amp; error budgets</dt>
-        <dd>Burn-rate alerts on multi-window, multi-burn policy. Budget remaining per service, tracked against a 28-day rolling target.</dd>
+        <span class="coord">01 / HEALTH</span>
+        <dt>Immunizations &amp; health</dt>
+        <dd>Doses with dates, allergies, and conditions, plus what's due next against the standard childhood schedule. A record you can read off a form, not medical advice.</dd>
       </div>
       <div class="survey-row">
-        <span class="coord">02 / CHG</span>
-        <dt>Deploy &amp; change events</dt>
-        <dd>CI pipelines, GitOps commits, feature-flag flips, and infra applies — timestamped to the second and joined to the component that moved.</dd>
+        <span class="coord">02 / SCHOOL</span>
+        <dt>Education</dt>
+        <dd>Schools, terms, teachers, and the milestones and reports worth keeping. The answer to "where were they in 2023" without digging through email.</dd>
       </div>
       <div class="survey-row">
-        <span class="coord">03 / VUL</span>
-        <dt>Vulnerability intelligence</dt>
-        <dd>NVD, GHSA, and OS vendor feeds matched to running image digests, package manifests, and SBOMs. Reachability-scored, not merely present.</dd>
+        <span class="coord">03 / KITH</span>
+        <dt>The people they love</dt>
+        <dd>The friends your child holds close, those friends' parents, and how to reach them. Kept like they matter, because to your child they do.</dd>
       </div>
       <div class="survey-row">
-        <span class="coord">04 / ESC</span>
-        <dt>On-call &amp; escalation</dt>
-        <dd>Rotation state, ack latency, and hand-off notes. Knows whether a page belongs to an SRE, to security, or to both.</dd>
-      </div>
-      <div class="survey-row">
-        <span class="coord">05 / IAM</span>
-        <dt>Identity &amp; access anomalies</dt>
-        <dd>New privilege grants, token minting, and unusual admin-API calls, placed on the same map as the reliability signal.</dd>
+        <span class="coord">04 / PREF</span>
+        <dt>Preferences &amp; needs</dt>
+        <dd>Foods, fears, comforts, routines. The two-minute brief that lets a grandparent or a new sitter get the evening right.</dd>
       </div>
     </dl>
   </section>
 
-  <!-- ============ ROLES ============ -->
-  <section class="band shell" id="roles">
+  <!-- ============ WHEN YOU'LL REACH FOR IT ============ -->
+  <section class="band shell" id="why">
     <div class="band-head">
-      <h2>Who it's for</h2>
+      <h2>When you'll reach for it</h2>
+      <p>The record is quiet for months, then a moment asks for exactly what's in it.</p>
     </div>
-    <div class="roles">
-      <div class="role-major">
-        <h3>The SRE holding the pager</h3>
-        <p>
-          You inherited a system nobody has drawn in two years. When something breaks at
-          02:00, the first ten minutes go to working out what else is downstream of it —
-          which is exactly the information Blastradius has already computed.
-        </p>
-        <p>
-          The map is built from what is actually deployed: service discovery, traces, and
-          infrastructure state. It updates when the architecture does, not when someone
-          remembers to update the wiki.
-        </p>
-        <p class="role-note">Primary audience</p>
+    <dl class="survey">
+      <div class="survey-row">
+        <span class="coord">A / FORM</span>
+        <dt>An enrolment form</dt>
+        <dd>It wants the date of the last tetanus shot, every prior school, two emergency contacts. You have them, in order.</dd>
       </div>
-      <div class="role-minor">
-        <h3>Security, on the same map</h3>
-        <p>
-          A CVE matters differently depending on where it sits. Blastradius scores
-          advisories against the components that actually run the vulnerable build, and
-          shows what that component would take with it.
-        </p>
-        <p class="role-note">Secondary audience</p>
+      <div class="survey-row">
+        <span class="coord">B / SITTER</span>
+        <dt>A new sitter</dt>
+        <dd>Hand them the preferences page. Allergies, bedtime, the song. Two minutes instead of twenty, and nothing forgotten.</dd>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ RUNNING IT ============ -->
-  <section class="band night-band shell" id="run">
-    <div class="band-head">
-      <h2>Running it</h2>
-      <p>Deployment and compliance posture, stated plainly.</p>
-    </div>
-    <dl class="deploy">
-      <div>
-        <span class="coord">06 / DEP</span>
-        <dt>Self-host or cloud</dt>
-        <dd>Run it inside your own perimeter, or let us run it. The same build, the same map, the same data model.</dd>
+      <div class="survey-row">
+        <span class="coord">C / CARE</span>
+        <dt>Urgent care</dt>
+        <dd>The triage nurse asks what they're allergic to and when they last had a booster. You read it out; you're not guessing.</dd>
       </div>
-      <div>
-        <span class="coord">07 / SOC</span>
-        <dt>SOC 2 Type II</dt>
-        <dd>Audited controls covering security, availability, and confidentiality.</dd>
-      </div>
-      <div>
-        <span class="coord">08 / DEM</span>
-        <dt>No agent for the demo</dt>
-        <dd>The walkthrough runs against a read-only view of your service discovery. Nothing is installed to see the map.</dd>
+      <div class="survey-row">
+        <span class="coord">D / HOMES</span>
+        <dt>Two households</dt>
+        <dd>Both caregivers keep one record. Invite per child, choose read or contribute, revoke access any time.</dd>
       </div>
     </dl>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="band night-band shell" id="pricing">
+    <div class="band-head">
+      <h2>Pricing</h2>
+      <p>One record, three sizes of household. Export is included on every plan. It is not a paid feature.</p>
+    </div>
+    <p class="price-note">Provisional. These numbers are not final and will change before launch.</p>
+    <dl class="tiers">
+      <div class="tier">
+        <span class="coord">I</span>
+        <dt>Solo</dt>
+        <dd>One child, one caregiver. The full record, with export.</dd>
+        <span class="price"><span class="amount">$0</span><span class="unit">provisional</span></span>
+      </div>
+      <div class="tier">
+        <span class="coord">II</span>
+        <dt>Family</dt>
+        <dd>Up to four children and two caregivers. Shared record with per-child invites.</dd>
+        <span class="price"><span class="amount">$4 / mo</span><span class="unit">provisional</span></span>
+      </div>
+      <div class="tier">
+        <span class="coord">III</span>
+        <dt>Extended</dt>
+        <dd>Unlimited children. Invite grandparents and sitters with access scoped to what they need.</dd>
+        <span class="price"><span class="amount">$9 / mo</span><span class="unit">provisional</span></span>
+      </div>
+    </dl>
+  </section>
+
+  <!-- ============ CONTACT & DATA ============ -->
+  <section class="band shell" id="contact">
+    <div class="band-head">
+      <h2>Contact</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p>Questions, press, or a request about your data. Write to us and a person will answer.</p>
+        <!-- TODO(launch): hello@kith.example is a reserved TLD and cannot receive mail.
+             Point this at a monitored inbox or a contact form before shipping. -->
+        <a class="contact-mail" href="mailto:hello@kith.example?subject=Kith">hello@kith.example</a>
+      </div>
+      <div class="data-note">
+        <h3>Your data</h3>
+        <p>You can export the entire record as a file, and delete your account and everything in it, whenever you want. That's not a plan feature; it's how the product works.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ============ CLOSE ============ -->
-  <section class="band close shell" id="book">
-    <h2>See your own map</h2>
-    <p>
-      A 30-minute walkthrough, drawn against your own services. No agent to install to
-      see it.
-    </p>
-    <div class="hero-actions">
-      <a class="action" href="mailto:walkthrough@blastradius.example?subject=Blastradius%20walkthrough">
-        Book a walkthrough
+  <section class="band close shell" id="login">
+    <h2>Begin the record</h2>
+    <p>Start with today — one dose, one friend, one thing they won't eat. Add the history when you have a minute.</p>
+    <div class="leaf-actions">
+      <a class="action" href="#login">
+        Start the record
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <path d="M2 8h11M9 4l4 4-4 4"/>
         </svg>
       </a>
+      <a class="action-quiet" href="#login">Log in</a>
     </div>
   </section>
 </main>
 
 <footer class="shell">
-  <span>Blastradius — the architecture portal for on-call SREs</span>
-  <span>Self-host or cloud · SOC 2 Type II</span>
+  <span>Kith · a private record for one childhood</span>
+  <span>Your data, exportable and erasable · Demo data is synthetic</span>
 </footer>
 
 <script>
 (function () {
   "use strict";
+  var ledger = document.getElementById("ledger");
+  if (!ledger) return;
+  var leaf = ledger.closest(".leaf-b") || ledger;
 
-  // --- topology (synthetic, for demonstration) ---
-  var NODES = [
-    { id: "edge-gateway",     x: 320, y:  44 },
-    { id: "checkout-api",     x: 128, y: 154 },
-    { id: "search-api",       x: 320, y: 154 },
-    { id: "auth-svc",         x: 512, y: 154 },
-    { id: "payments-api",     x:  82, y: 264 },
-    { id: "inventory",        x: 250, y: 264 },
-    { id: "session-store",    x: 418, y: 264 },
-    { id: "notify-worker",    x: 566, y: 264 },
-    { id: "ledger",           x: 148, y: 374 },
-    { id: "postgres-primary", x: 340, y: 374 },
-    { id: "kafka",            x: 528, y: 374 },
-    { id: "object-store",     x: 258, y: 476 },
-    { id: "pg-replica",       x: 438, y: 476 }
-  ];
+  function open() { ledger.classList.add("is-open"); }
 
-  // "a depends on b"
-  var EDGES = [
-    ["edge-gateway", "checkout-api"], ["edge-gateway", "search-api"], ["edge-gateway", "auth-svc"],
-    ["checkout-api", "payments-api"], ["checkout-api", "inventory"], ["checkout-api", "session-store"],
-    ["search-api", "inventory"], ["search-api", "session-store"],
-    ["auth-svc", "session-store"], ["auth-svc", "postgres-primary"],
-    ["payments-api", "ledger"], ["payments-api", "kafka"],
-    ["inventory", "postgres-primary"], ["inventory", "kafka"],
-    ["notify-worker", "kafka"],
-    ["ledger", "postgres-primary"],
-    ["pg-replica", "postgres-primary"],
-    ["kafka", "object-store"]
-  ];
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) { open(); return; }
 
-  var NW = 128, NH = 34;
-  var byId = {};
-  NODES.forEach(function (n) { byId[n.id] = n; });
-
-  // dependents: who breaks if `id` breaks
-  var dependents = {};
-  NODES.forEach(function (n) { dependents[n.id] = []; });
-  EDGES.forEach(function (e) { dependents[e[1]].push(e[0]); });
-
-  var svg = document.querySelector("svg.map");
-  var edgeLayer = document.getElementById("edges");
-  var nodeLayer = document.getElementById("nodes");
-  var readout = document.getElementById("readout");
-  var NS = "http://www.w3.org/2000/svg";
-
-  function el(name, attrs) {
-    var e = document.createElementNS(NS, name);
-    for (var k in attrs) { if (attrs[k] !== undefined) e.setAttribute(k, attrs[k]); }
-    return e;
-  }
-
-  // --- draw edges as orthogonal survey runs ---
-  var edgeEls = {};
-  EDGES.forEach(function (e) {
-    var a = byId[e[0]], b = byId[e[1]];
-    // leave each box from the face that points at the other box
-    var down = b.y > a.y;
-    var y1 = a.y + (down ? NH / 2 : -NH / 2);
-    var y2 = b.y + (down ? -NH / 2 : NH / 2);
-    var mid = y1 + (y2 - y1) * 0.55;
-    var d = "M" + a.x + " " + y1 + " V" + mid + " H" + b.x + " V" + y2;
-    var p = el("path", { d: d, class: "edge" });
-    edgeEls[e[0] + ">" + e[1]] = p;
-    edgeLayer.appendChild(p);
-  });
-
-  // --- blast magnitude, so severity is carried by size and not by colour alone ---
-  var magnitude = {};
-  var maxMag = 1;
-  NODES.forEach(function (n) {
-    var seen = {}, f = [n.id], c = 0;
-    seen[n.id] = true;
-    while (f.length) {
-      var nx = [];
-      f.forEach(function (id) {
-        dependents[id].forEach(function (d) {
-          if (!seen[d]) { seen[d] = true; c++; nx.push(d); }
-        });
-      });
-      f = nx;
-    }
-    magnitude[n.id] = c;
-    if (c > maxMag) maxMag = c;
-  });
-
-  // --- draw nodes ---
-  var nodeEls = {};
-  NODES.forEach(function (n) {
-    var g = el("g", {
-      class: "node", tabindex: "0", role: "button",
-      "aria-label": "Trace impact from " + n.id
+  // observe the container, never the ledger itself: the ledger starts clipped to
+  // zero width, so it can never satisfy its own intersection threshold
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { open(); io.disconnect(); }
     });
-    g.appendChild(el("rect", {
-      class: "node-box", x: n.x - NW / 2, y: n.y - NH / 2, width: NW, height: NH
-    }));
-    var t = el("text", {
-      class: "node-label", x: n.x, y: n.y - 1, "text-anchor": "middle"
-    });
-    t.textContent = n.id;
-    g.appendChild(t);
-    var h = el("text", {
-      class: "node-hop", x: n.x + NW / 2 - 4, y: n.y - NH / 2 - 6, "text-anchor": "end"
-    });
-    g.appendChild(h);
+  }, { threshold: 0.35 });
+  io.observe(leaf);
 
-    // magnitude bar, inside the box so it never collides with an edge run:
-    // how much this component takes with it, readable before the label
-    var mw = magnitude[n.id] / maxMag * (NW - 18);
-    g.appendChild(el("rect", {
-      class: "mag-track", x: n.x - NW / 2 + 9, y: n.y + 8, width: NW - 18, height: 3
-    }));
-    if (mw > 0) {
-      g.appendChild(el("rect", {
-        class: "mag-fill", x: n.x - NW / 2 + 9, y: n.y + 8, width: mw, height: 3
-      }));
-    }
-    g.appendChild(el("title", {})).textContent =
-      n.id + " — " + magnitude[n.id] + " dependent service" +
-      (magnitude[n.id] === 1 ? "" : "s") + " downstream";
-
-    g.addEventListener("click", function () { trace(n.id); });
-    g.addEventListener("keydown", function (ev) {
-      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); trace(n.id); }
-    });
-
-    nodeEls[n.id] = { g: g, hop: h };
-    nodeLayer.appendChild(g);
-  });
-
-  // --- blast radius: BFS over dependents ---
-  function rings(origin) {
-    var seen = {}, out = [], frontier = [origin];
-    seen[origin] = true;
-    while (frontier.length) {
-      var next = [];
-      frontier.forEach(function (id) {
-        dependents[id].forEach(function (d) {
-          if (!seen[d]) { seen[d] = true; next.push(d); }
-        });
-      });
-      if (next.length) out.push(next);
-      frontier = next;
-    }
-    return out;
-  }
-
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var timers = [];
-  var tracedAt = null;
-
-  function stamp(d) {
-    function p(n) { return (n < 10 ? "0" : "") + n; }
-    return p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds());
-  }
-
-  function clearTimers() {
-    timers.forEach(clearTimeout);
-    timers = [];
-  }
-
-  // primeOnly paints the resting state (origin + totals) without spending the cascade,
-  // so the plate is never blank while it is still below the fold
-  function trace(origin, primeOnly) {
-    clearTimers();
-    tracedAt = new Date();
-
-    NODES.forEach(function (n) {
-      var g = nodeEls[n.id].g;
-      g.classList.remove("is-origin", "is-hit");
-      g.classList.add("is-clear");
-      nodeEls[n.id].hop.textContent = "";
-    });
-    Object.keys(edgeEls).forEach(function (k) { edgeEls[k].classList.remove("is-hit"); });
-
-    var og = nodeEls[origin].g;
-    og.classList.remove("is-clear");
-    og.classList.add("is-origin");
-    nodeEls[origin].hop.textContent = "origin";
-
-    var waves = rings(origin);
-    var total = waves.reduce(function (s, w) { return s + w.length; }, 0);
-    var step = reduced ? 0 : 420;
-
-    // everything reached so far, so an edge lights only once both ends are in the radius
-    var reached = {};
-    reached[origin] = true;
-
-    render(origin, waves, 0, total);
-    if (primeOnly) return;
-
-    waves.forEach(function (wave, i) {
-      var run = function () {
-        wave.forEach(function (id) {
-          var ne = nodeEls[id];
-          ne.g.classList.remove("is-clear");
-          ne.g.classList.add("is-hit");
-          ne.hop.textContent = "+" + (i + 1);
-          reached[id] = true;
-
-          // id depends on something already in the radius: that link carried the failure
-          EDGES.forEach(function (e) {
-            if (e[0] !== id || !reached[e[1]]) return;
-            var t = edgeEls[e[0] + ">" + e[1]];
-            if (t) t.classList.add("is-hit");
-          });
-        });
-        render(origin, waves, i + 1, total);
-      };
-      if (step) { timers.push(setTimeout(run, step * i)); } else { run(); }
-    });
-  }
-
-  function render(origin, waves, shown, total) {
-    var head = document.getElementById("head-state");
-    if (head) {
-      head.innerHTML = total === 0
-        ? '<span class="o">' + esc(origin) + "</span> — isolated, nothing downstream"
-        : '<span class="o">' + esc(origin) + '</span> takes <span class="n">' + total +
-          "</span> service" + (total === 1 ? "" : "s") + ' with it, across <span class="n">' +
-          waves.length + "</span> hop" + (waves.length === 1 ? "" : "s");
-    }
-
-    var lines = [];
-    lines.push(row("traced", tracedAt ? stamp(tracedAt) : "—"));
-    lines.push(row("origin", origin, "sev"));
-    lines.push(row("impact", total === 0
-      ? "no dependent services"
-      : total + " dependent service" + (total === 1 ? "" : "s") +
-        " across " + waves.length + " hop" + (waves.length === 1 ? "" : "s")));
-
-    waves.slice(0, shown).forEach(function (wave, i) {
-      lines.push(row("hop +" + (i + 1), wave.join("  ")));
-    });
-
-    if (shown >= waves.length) {
-      var outer = waves.length ? waves[waves.length - 1] : [];
-      lines.push(row("verdict", total === 0
-        ? "isolated — nothing downstream, safe to drain"
-        : "reaches " + outer.join(", ") + " at +" + waves.length,
-        total === 0 ? "" : "sev"));
-    }
-
-    readout.innerHTML = "<ol>" + lines.join("") + "</ol>";
-  }
-
-  function row(k, v, cls) {
-    return '<li><span class="k">' + esc(k) + '</span><span class="v ' +
-           (cls || "") + '">' + esc(v) + "</span></li>";
-  }
-
-  function esc(s) {
-    return String(s).replace(/[&<>"]/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
-    });
-  }
-
-  // --- one authored moment: the plate traces itself when it first comes into view ---
-  var LEAD = "postgres-primary";
-  var fired = false;
-
-  // where the map is wider than its column, bring the origin into the visible window
-  // instead of leaving the reader parked on the clipped left edge
-  function centreOrigin(id) {
-    var box = svg.parentNode;
-    if (!box || box.scrollWidth <= box.clientWidth) return;
-    var n = byId[id];
-    if (!n) return;
-    var scale = svg.getBoundingClientRect().width / 640;
-    box.scrollLeft = Math.max(0, n.x * scale - box.clientWidth / 2);
-  }
-
-  function kick() {
-    if (fired) return;
-    fired = true;
-    trace(LEAD);
-  }
-
-  trace(LEAD, true); // resting state, painted immediately
-  centreOrigin(LEAD);
-  window.addEventListener("resize", function () { centreOrigin(LEAD); });
-
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { kick(); io.disconnect(); }
-      });
-    }, { threshold: 0.2 });
-    io.observe(svg);
-  } else {
-    kick();
-  }
+  // safety net: if the observer has not fired shortly after load, deploy anyway
+  setTimeout(function () {
+    if (!ledger.classList.contains("is-open")) open();
+  }, 1600);
 })();
 </script>
 

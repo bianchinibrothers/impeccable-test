@@ -5,47 +5,46 @@ primary_target: "index.html"
 related_targets: []
 ---
 
-Scope: index.html, the Blastradius marketing landing page. Visitor mode: Persuade.
+Scope: index.html, the Kith marketing landing page. Visitor mode: Persuade.
 
-Audience: on-call SREs evaluating an architecture portal; security engineers secondary. Action: book a walkthrough. Proof: an interactive dependency map that traces blast radius through real service dependencies. Constraint: self-host or cloud, SOC 2 Type II; no invented customers, prices, or benchmarks.
+Audience: a parent (usually on a phone) deciding whether to keep one private record of their child's health, schooling, friends, and preferences. Action: create an account / log in; secondary, contact. Proof: the shape of the record itself, shown as a synthetic dated ledger page. Constraint: every real feature is behind login; no invented users, prices, certifications, or partners — pricing on the page is labelled provisional.
 
 ## Direction contract
 
-THESIS: The page is a drawn architecture plate, not a product tour — the system map is the hero and the incident reads as propagation across it. Refuses the SaaS stack of centered hero, three feature cards, logo wall.
+THESIS: The page is an open ledger for one childhood — a two-page spread, pitch on the left leaf, a living dated record on the right. Refuses the SaaS stack of centered hero, three feature cards, logo wall, and refuses the scrapbook/photo-feed reading of "family app".
 
-OWN-WORLD: Ochre paper ground (oklch(94% 0.035 78)) under a 112px survey grid and multiply grain; deep teal night (oklch(17% 0.035 185)) owns whole regions; gold (oklch(68% 0.145 74)) and burnt sun (oklch(64% 0.19 43)) mark healthy and breaching. Chakra Petch 300 in oversized uppercase over Zen Old Mincho body text; Azeret Mono for all telemetry. Zero radius, hairline rules, no drop shadows except the one lifted plate.
+OWN-WORLD: Inherited Neo Mirai, unchanged. Ochre survey paper (oklch(94% 0.035 78)) under the 112px ruled grid and multiply grain; deep teal night (oklch(17% 0.035 185)) owns whole leaves and bands; gold (oklch(68% 0.145 74)) marks a kept entry, burnt sun (oklch(64% 0.19 43)) marks one thing due. Chakra Petch 300 oversized uppercase over Zen Old Mincho body over Azeret Mono for every date, dose, and identifier. Zero radius, hairline rules, one lifted surface (the right leaf).
 
-STORY: This is the map of my system, drawn — I can see what a failure touches before it touches me; book the walkthrough.
+STORY: This is the record I wish someone had kept for me — shots, schools, the friends who matter, the foods that don't work. It is structured, it is mine to export, and I can start it now.
 
-FIRST VIEWPORT: Full-bleed dark architecture plate right of center, services as nodes on the survey grid with one node in sun-orange and its dependency edges lit outward. Oversized uppercase headline in the left third over a paper scrim, small Mincho summary beneath, mono coordinate rail down the left margin. Primary action sits inline under the summary, not in the header.
+FIRST VIEWPORT: A two-leaf spread bound at a centre gutter that is the page's governing vertical axis. Left leaf on ochre: oversized uppercase headline broken to three lines, one Zen Old Mincho line beneath, the primary action inline under it, a mono coordinate rail ("Record — leaf 01") down the outer margin. Right leaf as the lifted plate on teal night: a synthetic, clearly-labelled record page — hairline rows, each row a mono date + a domain coordinate (VAX / SCHL / KITH / PREF) + a short entry, one row in burnt sun reading "due", the rest in gold or dimmed. Header carries wordmark, a few anchors, and Log in; no button in the header.
 
-FORM: Neo Mirai — user-pinned, beats the roll (seed key 7a766078, mode persuade, assignment index 5 superseded by the pin).
+FORM: The Ledger Spread — surface structure roll, seed key b3a21bd4, mode persuade, dealt lead (my ranked #6 of 7). World not rolled: Neo Mirai inherited from the prior product and reaffirmed by the user ("maintain the style and the fonts").
 
-RAISE (from Daylight Section, competitive): every claim carries its component id and timestamp in tabular mono, pinned to coordinates.
-RAISE (from Mesophotic Dive): one governing vertical axis every element registers to.
-RAISE (from Phosphor Terminal): state prints itself as content, never as a chrome badge.
-RAISE (from Telop Field): scale maps to severity magnitude, read before the words.
-RAISE (from Linocut): single-ink commitment — night teal owns whole regions rather than tinting accents.
+RAISE (from bioluminescent-plankton-wake, challenger to the lead): a kept row shows in gold and carries a mono "last kept" date; a long-untouched row fades toward dim on-night — tending the record is visible as light on the leaf, state always doubled by the date.
+RAISE (from Miura-fold deployable sheet, challenger): the right leaf's rows deploy in one orchestrated unfold from the gutter on first view, not a per-element stagger.
+RAISE (carried from the inherited world): state prints as content in a mono readout, never as a chrome badge; one governing vertical axis (here the gutter) every element registers to; single-ink — teal night owns whole leaves, never a tinted card.
 
-NOTE: pinned world, full material range. Ochre, teal, gold, sun — never softened to cream-and-serif.
+NOTE: pinned world, full material range — ochre, teal, gold, sun, never softened to cream-and-serif for being a "family" product. Provisional pricing and the synthetic record are labelled as such; Log in and Contact are stubs flagged for wiring.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
-## Finish state
-
-Two review rounds spent. Round 1 (full review): disposition fix, 8 material findings, all 8 addressed. Round 2 (verdict pass, run by a fresh reviewer from degraded/finish-reviewer.md because this harness has no agent continuation): 5 resolved, 2 partial, 3 regressions named, disposition fix.
-
-The user was given the table at the two-round ceiling and chose "just fix the CTA, then stop". R1 was fixed; the remaining four items are knowingly open, not forgotten.
-
 ## Unresolved decisions
 
-- **Booking destination.** Both CTAs work (hero scrolls to the close section; the close opens a mail composer), but the address is `walkthrough@blastradius.example` — an IANA-reserved TLD that cannot resolve. Must be pointed at the real booking flow before launch.
-- **Timestamp annotation (open, material).** The Daylight Section RAISE promises component id *and* timestamp in tabular mono. Component ids and sheet coordinates ship; no tabular timestamp exists anywhere on the page. The RAISE is half-kept.
-- **Map mono under the floor at mobile (open, material).** `svg.map` carries `min-width: 540px` against a `0 0 640 512` viewBox, so below ~640px the map paints at 0.84 scale and `.node-label` / `.node-hop` land at roughly 9.3–9.7 CSS px, under the 11.5px floor. Fix by raising the in-SVG sizes for that scale factor or reducing `min-width` against the viewBox — re-declaring the values alone will not do it.
-- **Mobile reading order (open).** The legend stacks between the hero CTA and the plate, pushing the map below the first screen at 390px, so the reader meets the colour key before the map it keys. FIRST VIEWPORT promises the plate as the hero. Fix by moving the legend after the plate on narrow widths, or folding it into the plate's foot.
-- **Header status reads as navigation (open).** `.header-status` at 0.78rem mixed-case mono sits at the nav's optical weight and baseline, so "Demo data · us-east-1 · 13 services" scans as a fourth nav item. Differentiate by figures, rule, size, or colour — not by returning to all-caps, which trips the detector.
-- **Held as ceiling, not material:** sheet furniture (title block, registration ticks, scale bar).
+- **Product name.** "Kith" is a working name chosen by the user; final name pending. One find-replace to change.
+- **Log in destination.** `#login` stub; no auth flow exists. Wire before launch.
+- **Contact destination.** `mailto:` with a marked-TODO address (reserved TLD). Point at a real inbox or form before launch.
+- **Pricing.** Provisional tiers and numbers, labelled "not final" on the page. Replace with real figures before launch.
+- **Synthetic record.** The right-leaf entries and any About-section record rows are invented and labelled synthetic; no real child data.
+
+## Finish state
+
+One review round spent. Round 1 (full review): disposition `fix`, 5 material findings — (1) mobile coordinate rail rendered as a kicker above the `<h1>`; (2) ledger rows shipped `<dd>` with no `<dt>`; (3) ledger deploy layered a per-row stagger on the gutter wipe; (4) DESIGN.md still described the retired Blastradius build; (5) desktop left leaf ended short of the record leaf, reading half-empty. All 5 fixed in one batch. Verdict pass: **all 5 resolved, disposition `ship`** (scope: the five fixes, not a fresh whole-surface pass). No material regressions; one noted minor overlap between the `.leaf-foot` line and the "Your data" note, judged acceptable.
+
+DESIGN.md and `.impeccable/design.json` re-recorded from the shipped build by `impeccable-documenter` (Neo Mirai kept; dependency-map components replaced with the spread / record-leaf-ledger / ruled survey / tiers / contact / rail; grain-bloom colors and full type ramp now documented; `--on-night-dim` at `oklch(70% 0.025 175)`; Binding Axis Rule added).
+
+Not canonised in DESIGN.md: `--ease-quart` and Zen Old Mincho 600/900 are declared/loaded in the build but unused — dead references, safe to prune on the next edit.
 
 ## Detector state
 
-Clean except `cramped-padding`, adjudicated by the finish reviewer as false positives (`.band` carries 56–112px padding; `.survey` legitimately has none because a survey table's first row sits on its own rule). Deliberately left unsuppressed on the reviewer's instruction — a file-wide ignore would blind the rule on later work. The only suppression on this project is `cream-palette` scoped to index.html, judged defensible because the flagged ground is Neo Mirai's own `--paper` token and the user pinned that world.
+Inherited suppression: `cream-palette` scoped to index.html — the flagged ground is Neo Mirai's own `--paper` token and the user pinned that world. `cramped-padding` on the ruled survey rows and bands was adjudicated by the prior finish reviewer as a false positive (a survey table's first row sits on its own rule; bands carry 56–112px padding) and left unsuppressed on purpose.
